@@ -1,0 +1,88 @@
+{
+  "Error": {
+    "description": "<p>Infelizmente encontramos um erro.</p><p>Você pode tentar <retry>recarregar a página</retry> que estava visitando.</p>",
+    "title": "Algo deu errado!"
+  },
+  "IndexPage": {
+    "description": "Este é um exemplo básico que demonstra o uso do <code>next-intl</code> com o Next.js App Router. Tente alterar o idioma no canto superior direito e veja como o conteúdo muda.",
+    "title": "exemplo next-intl"
+  },
+  "LocaleLayout": {
+    "title": "exemplo next-intl"
+  },
+  "LocaleSwitcher": {
+    "label": "Alterar idioma",
+    "locale": "{locale, select, en {🇺🇸 Inglês} pt {🇧🇷 Português} other {🌍 {locale}}}"
+  },
+  "Manifest": {
+    "name": "exemplo next-intl"
+  },
+  "Navigation": {
+    "home": "Início",
+    "pathnames": "Caminhos",
+    "dashboard": "Dashboard",
+    "myAccount": "Minha Conta",
+    "signIn": "Entrar",
+    "hello": "Olá"
+  },
+  "NotFoundPage": {
+    "description": "Por favor, verifique novamente a barra de endereços do navegador ou use a navegação para ir para uma página conhecida.",
+    "title": "Página não encontrada"
+  },
+  "PageLayout": {
+    "links": {
+      "docs": {
+        "description": "Saiba mais sobre next-intl na documentação oficial.",
+        "href": "https://next-intl.dev",
+        "title": "Documentação"
+      },
+      "source": {
+        "description": "Navegue pelo código fonte deste exemplo no GitHub.",
+        "href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
+        "title": "Código fonte"
+      }
+    }
+  },
+  "PathnamesPage": {
+    "description": "<p>Os caminhos também são internacionalizados.</p><p>Se você estiver usando o idioma padrão Inglês, verá <code>/en/pathnames</code> na barra de endereços do navegador nesta página.</p><p>Se você alterar o locale para Alemão, a URL será localizada adequadamente (<code>/de/pfadnamen</code>).</p>",
+    "title": "Caminhos"
+  },
+  "HomePage": {
+    "title": "Página inicial"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Bem-vindo de volta",
+      "description": "Faça login com sua conta Google",
+      "buttonGoogle": "Login com Google",
+      "or": "Ou continue com",
+      "labelEmail": "Email",
+      "labelPassword": "Senha",
+      "forgotPassword": "Esqueceu sua senha?",
+      "buttonSignIn": "Entrar",
+      "dontHaveAccount": "Não tem uma conta?",
+      "linkSignUp": "Cadastrar",
+      "termsOfService": "Ao continuar, você concorda com nossos",
+      "linkTermsOfService": "Termos de Serviço",
+      "and": "e",
+      "linkPrivacyPolicy": "Política de Privacidade"
+    },
+    "signUp": {
+      "title": "Criar uma conta",
+      "description": "Crie uma conta com sua conta Google",
+      "buttonGoogle": "Criar com Google",
+      "or": "Ou continue com",
+      "labelFullName": "Nome completo",
+      "labelEmail": "Email",
+      "labelPassword": "Senha",
+      "labelConfirmPassword": "Confirmar senha",
+      "buttonSignUp": "Criar conta",
+      "alreadyHaveAccount": "Já tem uma conta?",
+      "linkSignIn": "Entrar",
+      "termsOfService": "Ao continuar, você concorda com nossos",
+      "linkTermsOfService": "Termos de Serviço",
+      "and": "e",
+      "linkPrivacyPolicy": "Política de Privacidade"
+    }
+  }
+}

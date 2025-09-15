@@ -1,0 +1,26 @@
+{
+  "users": {
+    "error": "relation \"public.users\" does not exist",
+    "records": 0
+  },
+  "accounts": {
+    "error": "relation \"public.accounts\" does not exist",
+    "records": 0
+  },
+  "sessions": {
+    "error": "relation \"public.sessions\" does not exist",
+    "records": 0
+  },
+  "verification_tokens": {
+    "error": "relation \"public.verification_tokens\" does not exist",
+    "records": 0
+  },
+  "_metadata": {
+    "backup_timestamp": "2025-07-06T21:33:39.247Z",
+    "supabase_url": "https://ectnqlijiugphxkjdmxd.supabase.co",
+    "total_tables": 4,
+    "total_records": 0,
+    "backup_version": "1.0",
+    "created_by": "Supabase Backup Service"
+  }
+}
