@@ -1,7 +1,7 @@
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
 import { auth } from "@/lib/auth"
-import { useLocale } from "next-intl"
+import { getLocale } from "next-intl/server"
 import { redirect } from "next/navigation"
 
 export default async function DashboardLayout({
@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   params: Promise<{ locale: string }>
 }) {
   const session = await auth()
-  const locale = await useLocale()
+  const locale = await getLocale()
   
   if (!session?.user) {
     redirect(`/${locale}/sign-in`)
