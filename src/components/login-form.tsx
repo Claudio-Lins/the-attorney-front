@@ -14,10 +14,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { AlertCircle, Clock } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import logo from "@assets/the-attorney-logo.svg";
+import { AlertCircle, Clock, Loader2 } from "lucide-react";
+import { useLocale, useTranslations } from 'next-intl';
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import { GoogleSignIn } from "./auth/google-sign-in";
+import { Separator } from "./ui/separator";
 
 export function LoginForm({
   className,  
@@ -28,6 +31,8 @@ export function LoginForm({
   const [error, setError] = useState<string | null>(null);
   const [rateLimited, setRateLimited] = useState<{ blocked: boolean; duration?: number } | null>(null);
 
+  const locale = useLocale();
+  
   async function handleSubmit(formData: FormData) {
     setIsLoading(true);
     setError(null);
@@ -36,18 +41,22 @@ export function LoginForm({
     try {
       const result = await signInWithCredentials(formData);
       
-      if (!result.success) {
-        setIsLoading(false);
-        
-        // Verificar se é erro de rate limiting
-        if ('rateLimited' in result && result.rateLimited) {
-          const duration = (result as any).blockDuration || 30;
-          setRateLimited({ blocked: true, duration });
-        } else {
-          setError(result.message || "Erro no login");
-        }
+      if (result.success) {
+        // On success, do a hard navigation to the dashboard to ensure all server
+        // components and client components are re-rendered with the new session.
+        window.location.href = '/en/dashboard';
+        return; // Stop execution to allow the redirect to happen
       }
-      // Se sucesso, o NextAuth vai redirecionar automaticamente
+
+      // Handle failure cases
+      setIsLoading(false);
+      if ('rateLimited' in result && result.rateLimited) {
+        const duration = (result as any).blockDuration || 30;
+        setRateLimited({ blocked: true, duration });
+      } else {
+        setError(result.message || "Erro no login");
+      }
+
     } catch (err: any) {
       setIsLoading(false);
       setError(err.message || "Erro no login");
@@ -58,13 +67,25 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="bg-white/40 backdrop-blur-sm rounded-lg">
         <CardHeader className="text-center">
+          <Link href={`/${locale}`}>
+						<Image
+							className="h-auto w-60 cursor-pointer object-contain md:w-40 mb-4 mx-auto"
+							src={logo}
+							alt="The Attorney Logo"
+							width={300}
+							height={50}
+							priority
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+						/>
+					</Link>
+					<Separator className="my-4" />
           <CardTitle className="text-xl">{t('title')}</CardTitle>
-          <CardDescription>
+          <CardDescription className="text-center text-balance text-sm text-foreground">
             {t('description')}
           </CardDescription>
         </CardHeader>
         <CardContent className="">
-          <GoogleSignIn />
+          {/* <GoogleSignIn /> */}
           
           {/* Mensagens de erro */}
           {error && (
@@ -84,12 +105,9 @@ export function LoginForm({
             </Alert>
           )}
           
-          <form className='mt-4' action={handleSubmit}>
+          <form action={handleSubmit}>
             <div className="grid gap-6">
-              <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-white/80 backdrop-blur-sm rounded-lg text-muted-foreground relative z-10 px-2">
-                  {t('or')}
-                </span>
+              <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center ">
               </div>
               <div className="grid gap-6">
                 <div className="grid gap-3">
@@ -100,27 +118,30 @@ export function LoginForm({
                     type="email"
                     placeholder="m@example.com"
                     required
+                    className="text-foreground placeholder:text-muted/50"
                   />
                 </div>
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">{t('labelPassword')}</Label>
                     <a
-                      href="/en/forgot-password"
-                      className="ml-auto text-sm underline-offset-4 hover:underline text-blue-600"
+                      href={`/${locale}/forgot-password`}
+                      className="ml-auto text-sm underline-offset-4 hover:underline text-foreground"
                     >
-                      Esqueceu a senha?
+                      {t('forgotPassword')}
                     </a>
                   </div>
                   <Input id="password" name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading || rateLimited?.blocked}>
-                  {isLoading ? "Entrando..." : t('buttonSignIn')}
+                  {isLoading ? 
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  : t('buttonSignIn')} 
                 </Button>
               </div>
               <div className="text-center text-sm">
                 {t('dontHaveAccount')}
-                <a href="/en/sign-up" className="underline underline-offset-4">
+                <a href={`/${locale}/sign-up`} className="underline underline-offset-4 text-foreground hover:text-primary ml-2">
                   {t('linkSignUp')}
                 </a>
               </div>

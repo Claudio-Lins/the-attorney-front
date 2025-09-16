@@ -1,4 +1,4 @@
-import ImageBackground from "@/public/img-unsplash/img-01.jpg";
+import ImageBackground from "@/public/img-unsplash/img-02.jpg";
 import Image from "next/image";
 
 export default function AuthLayout({

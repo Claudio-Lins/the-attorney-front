@@ -63,14 +63,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
    callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id
-        token.email = user.email
-        token.name = user.name
-        token.role = user.role || 'USER'
-        token.image = user.image || null
-        token.createdAt = user.createdAt || new Date()
-        token.updatedAt = user.updatedAt || new Date()
-        token.emailVerified = user.emailVerified || null
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.role = user.role || 'USER';
+        token.image = user.image || null;
+        token.createdAt = user.createdAt || new Date();
+        token.updatedAt = user.updatedAt || new Date();
+        token.emailVerified = user.emailVerified || null;
+
+        try {
+          const client = await prisma.client.findUnique({
+            where: { userId: user.id },
+          });
+          if (client) {
+            token.clientId = client.id;
+          }
+        } catch (error) {
+          console.error("Error fetching client in JWT callback:", error);
+        }
       }
       return token;
     },
@@ -85,6 +96,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           createdAt: token.createdAt as Date,
           updatedAt: token.updatedAt as Date,
           emailVerified: token.emailVerified as Date | null,
+          clientId: token.clientId as string | undefined,
         };
       }
       return session

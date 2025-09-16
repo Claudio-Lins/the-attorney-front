@@ -191,9 +191,99 @@ exports.Prisma.AuthenticatorScalarFieldEnum = {
   transports: 'transports'
 };
 
+exports.Prisma.ClientScalarFieldEnum = {
+  id: 'id',
+  client_id: 'client_id',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  email: 'email',
+  marital_status: 'marital_status',
+  passport_number: 'passport_number',
+  passport_expiry: 'passport_expiry',
+  nationality: 'nationality',
+  place_of_birth: 'place_of_birth',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  filiation: 'filiation',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  phone: 'phone',
+  photo_url: 'photo_url',
+  country_of_birth: 'country_of_birth',
+  passport_issue_date: 'passport_issue_date',
+  userId: 'userId'
+};
+
+exports.Prisma.AddressScalarFieldEnum = {
+  id: 'id',
+  street: 'street',
+  number: 'number',
+  complement: 'complement',
+  neighborhood: 'neighborhood',
+  city: 'city',
+  state: 'state',
+  zip_code: 'zip_code',
+  country: 'country',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  client_id: 'client_id'
+};
+
+exports.Prisma.Client_serviceScalarFieldEnum = {
+  id: 'id',
+  client_id: 'client_id',
+  service_id: 'service_id',
+  status: 'status',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  notes: 'notes',
+  documents: 'documents',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  assigned_to: 'assigned_to',
+  priority: 'priority',
+  os_number: 'os_number'
+};
+
+exports.Prisma.Client_service_historyScalarFieldEnum = {
+  id: 'id',
+  client_service_id: 'client_service_id',
+  changed_at: 'changed_at',
+  changed_by: 'changed_by',
+  field: 'field',
+  old_value: 'old_value',
+  new_value: 'new_value',
+  note: 'note'
+};
+
+exports.Prisma.ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  duration: 'duration',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  category_id: 'category_id'
+};
+
+exports.Prisma.Service_categoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -205,9 +295,37 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.Role = exports.$Enums.Role = {
-  USER: 'USER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+exports.MaritalStatus = exports.$Enums.MaritalStatus = {
+  SINGLE: 'SINGLE',
+  MARRIED: 'MARRIED',
+  DIVORCED: 'DIVORCED',
+  WIDOWED: 'WIDOWED',
+  SEPARATED: 'SEPARATED'
+};
+
+exports.ServiceStatus = exports.$Enums.ServiceStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.Priority = exports.$Enums.Priority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
 };
 
 exports.Prisma.ModelName = {
@@ -217,7 +335,13 @@ exports.Prisma.ModelName = {
   VerificationToken: 'VerificationToken',
   EmailVerificationToken: 'EmailVerificationToken',
   PasswordResetToken: 'PasswordResetToken',
-  Authenticator: 'Authenticator'
+  Authenticator: 'Authenticator',
+  client: 'client',
+  address: 'address',
+  client_service: 'client_service',
+  client_service_history: 'client_service_history',
+  service: 'service',
+  service_category: 'service_category'
 };
 
 /**

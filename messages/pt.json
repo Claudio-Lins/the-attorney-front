@@ -53,8 +53,8 @@
   "auth": {
     "signIn": {
       "title": "Bem-vindo de volta",
-      "description": "Faça login com sua conta Google",
-      "buttonGoogle": "Login com Google",
+      "description": "Faça login com seu email e senha",
+      "buttonGoogle": "Login com Email e Senha",
       "or": "Ou continue com",
       "labelEmail": "Email",
       "labelPassword": "Senha",
@@ -69,10 +69,11 @@
     },
     "signUp": {
       "title": "Criar uma conta",
-      "description": "Crie uma conta com sua conta Google",
-      "buttonGoogle": "Criar com Google",
+      "description": "Crie uma conta com seu email e senha",
+      "buttonGoogle": "Criar com Email e Senha",
       "or": "Ou continue com",
       "labelFullName": "Nome completo",
+      "placeholderFullName": "João da Silva",
       "labelEmail": "Email",
       "labelPassword": "Senha",
       "labelConfirmPassword": "Confirmar senha",
@@ -83,6 +84,187 @@
       "linkTermsOfService": "Termos de Serviço",
       "and": "e",
       "linkPrivacyPolicy": "Política de Privacidade"
+    },
+    "forgotPassword": {
+      "title": "Esqueceu sua senha?",
+      "description": "Digite seu email para receber as instruções de redefinição",
+      "buttonSendInstructions": "Enviar instruções",
+      "alreadyHaveAccount": "Lembrou da senha?",
+      "linkSignIn": "Entrar",
+      "placeholderEmail": "seu@email.com",
+      "labelEmail": "Email",
+      "sentEmail": "Email Enviado!",
+      "descriptionSentEmail": "Verifique sua caixa de entrada e clique no link para redefinir sua senha."
     }
-  }
+  },
+  "HomeData": {
+		"headerData": {
+			"id": 1,
+			"logo": {
+				"id": 1,
+				"logoText": "The Attorney",
+				"image": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				},
+				"imageNeg": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				},
+				"imagePos": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				}
+			},
+			"navigation": [
+				{
+					"id": 3,
+					"text": "Sobre",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#about"
+				},
+				{
+					"id": 4,
+					"text": "Serviços",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#services"
+				},
+				{
+					"id": 5,
+					"text": "FAQ",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#faqs"
+				},
+				{
+					"id": 6,
+					"text": "Painel",
+					"href": "/admin/dashboard",
+					"isAdmin": true,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "/admin/dashboard"
+				},
+				{
+					"id": 7,
+					"text": "Painel",
+					"href": "/client/dashboard",
+					"isAdmin": false,
+					"isClient": true,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "/client/dashboard"
+				}
+			]
+		},
+		"heroSectionData": {
+			"title": "O Advogado",
+			"name": "António Tavares Júnior",
+			"description": "Especializado em imigração, nacionalidade portuguesa e processos junto da AIMA e SEF. Garanta a sua residência, cidadania e regularização com segurança e eficiência.",
+			"heroImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106197/ruthson_zimmerman_Ws4wd_v_J9_M0_unsplash_a9721a9783.jpg",
+			"heroImageAlt": "António Tavares Júnior",
+			"buttonText": "Vamos Conversar"
+		},
+		"aboutSectionData": {
+			"name": "António Tavares Júnior",
+			"description": "António Tavares Júnior é advogado especializado em Direito da Imigração, com vasta experiência na prestação de apoio jurídico a estrangeiros que desejam estabelecer residência em Portugal.\nCom uma formação sólida e profundo conhecimento da legislação portuguesa e europeia sobre imigração, António tem dedicado a sua carreira a facilitar o processo de integração de pessoas de várias nacionalidades em território português.\n\nA sua atuação abrange todas as áreas do Direito da Imigração, desde a obtenção de vistos e autorizações de residência até processos de nacionalidade portuguesa, reagrupamento familiar e recursos administrativos junto da AIMA (Agência para a Imigração, Mobilidade e Asilo).\n\nAntónio Tavares Júnior destaca-se pela abordagem personalizada e humanizada, compreendendo que cada caso possui particularidades que exigem soluções adequadas. O seu compromisso é transformar o processo de imigração, por vezes complexo, numa jornada mais clara e acessível para os seus clientes.\n\nCom um histórico de casos bem-sucedidos e reconhecimento na área jurídica, António continua a ser uma referência para quem procura orientação segura e eficaz em matéria de imigração em Portugal.",
+			"aboutImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106196/depositphotos_118543600_stock_photo_handsome_caucasian_lawyer_74282f1342.webp",
+			"aboutImageAlt": "António Tavares Júnior",
+			"aboutOrdemImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106196/Ordem_dos_Advogados_e5b2c011be.png",
+			"aboutOrdemImageAlt": "Ordem dos Advogados",
+			"buttonText": "Contactar"
+		},
+		"servicesSectionData": {
+			"title": "Serviços",
+			"description": "Oferecemos uma ampla gama de serviços para o ajudar nas suas necessidades relacionadas com imigração.",
+			"buttonService": "Saber mais",
+			"services": [
+				{
+					"title": "Autorização de Residência",
+					"topics": [
+						"Obtenção de vistos e autorizações de residência para trabalho, estudo ou investimento.",
+						"Regularização da situação de imigrantes já presentes em Portugal.",
+						"Apoio no processo de Golden Visa e outros regimes especiais."
+					],
+					"description": "Obtenção de vistos e autorizações de residência para trabalho, estudo ou investimento. A nossa equipa especializada em imigração pode ajudá-lo a navegar no processo de obtenção de autorização de residência em Portugal. Também oferecemos apoio para o Golden Visa e outros regimes especiais, garantindo que tem todas as informações necessárias para uma transição tranquila."
+				},
+				{
+					"title": "Nacionalidade e Cidadania Portuguesa",
+					"topics": [
+						"Aquisição de cidadania por descendência (pais, avós ou bisavós portugueses).",
+						"Naturalização por tempo de residência em Portugal.",
+						"Cidadania para cônjuges de cidadãos portugueses.",
+						"Cidadania para filhos de cidadãos portugueses.",
+						"Cidadania para pais de cidadãos portugueses."
+					],
+					"description": "Aquisição de cidadania por descendência (pais, avós ou bisavós portugueses). A nossa equipa pode ajudá-lo a compreender os requisitos e processos envolvidos na aquisição da cidadania portuguesa, seja por descendência ou naturalização. Também oferecemos orientação a cônjuges, filhos e pais de cidadãos portugueses que pretendem obter a cidadania."
+				},
+				{
+					"title": "Reagrupamento Familiar",
+					"topics": [
+						"Processos para trazer familiares para residir legalmente em Portugal.",
+						"Apoio para comprovação dos vínculos familiares."
+					],
+					"description": "Processos para trazer familiares para residir legalmente em Portugal. A nossa equipa pode orientá-lo sobre os processos e requisitos para o reagrupamento familiar em Portugal, garantindo que tem todas as informações necessárias para uma reunião familiar tranquila."
+				},
+				{
+					"title": "Recursos e Contestações",
+					"topics": [
+						"Defesa contra recusas de vistos ou autorizações de residência.",
+						"Representação em processos de expulsão ou deportação.",
+						"Recursos administrativos junto da AIMA (Agência para a Imigração, Mobilidade e Asilo) e do SEF."
+					],
+					"description": "Defesa contra recusas de vistos ou autorizações de residência. A nossa equipa pode ajudá-lo a defender os seus direitos em casos de recusa, bem como representá-lo em processos de expulsão ou deportação. Também tratamos de recursos administrativos para garantir que tenha todas as oportunidades para defender o seu caso."
+				},
+				{
+					"title": "Apoio a Empresas e Trabalhadores",
+					"topics": [
+						"Obtenção de autorizações para trabalhadores estrangeiros exercerem legalmente em Portugal.",
+						"Apoio a empresas na contratação de mão de obra estrangeira."
+					],
+					"description": "Apoio a empresas na contratação de mão de obra estrangeira. A nossa equipa pode orientá-lo sobre os processos e requisitos legais para a contratação de trabalhadores estrangeiros em Portugal, assegurando que tudo decorre de forma legal e segura."
+				},
+				{
+					"title": "Proteção Internacional e Asilo",
+					"topics": [
+						"Aconselhamento para refugiados e requerentes de asilo.",
+						"Processo legal para obtenção de proteção humanitária."
+					],
+					"description": "Aconselhamento para refugiados e requerentes de asilo. A nossa equipa pode ajudá-lo a compreender os processos e requisitos para obter proteção internacional e asilo em Portugal, garantindo que dispõe de toda a informação necessária para apresentar o seu pedido com sucesso."
+				},
+				{
+					"title": "Regularização Fiscal e Jurídica",
+					"topics": [
+						"Apoio na obtenção do NIF (Número de Identificação Fiscal).",
+						"Registo na Segurança Social para acesso a benefícios e direitos."
+					],
+					"description": "Apoio na obtenção do NIF (Número de Identificação Fiscal). A nossa equipa pode orientá-lo sobre os processos para obter o NIF e o registo na Segurança Social em Portugal, assegurando uma integração fiscal e jurídica tranquila."
+				}
+			]
+		}
+	}
 }

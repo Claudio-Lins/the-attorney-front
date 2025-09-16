@@ -11,6 +11,7 @@ declare module "next-auth" {
       createdAt: Date
       updatedAt: Date
       emailVerified: Date | null
+      clientId?: string
     }
   }
 
@@ -23,6 +24,7 @@ declare module "next-auth" {
     createdAt?: Date
     updatedAt?: Date
     emailVerified?: Date | null
+    clientId?: string
   }
 }
 
@@ -36,5 +38,6 @@ declare module "next-auth/jwt" {
     createdAt: Date
     updatedAt: Date
     emailVerified: Date | null
+    clientId?: string
   }
 } 

@@ -39,7 +39,17 @@ export async function withRateLimit<T extends ActionResult>(
       rateLimitRemaining: rateLimitResult.remaining,
     }
   } catch (error) {
-    // Em caso de erro na ação, não fazer reset do rate limit
+    // If the error is a Next.js redirect, it means the action was successful.
+    // We swallow the error and return a success result.
+    if (typeof error === 'object' && error !== null && 'digest' in error && typeof (error as any).digest === 'string' && (error as any).digest.startsWith('NEXT_REDIRECT')) {
+      // The action was successful, reset the rate limit.
+      if (identifier) {
+        await resetRateLimit(type, identifier)
+      }
+      return { success: true, message: "Ação bem-sucedida." } as T;
+    }
+
+    // For all other errors, handle them as before.
     console.log(`Erro na ação ${type}:`, error)
     return {
       success: false,

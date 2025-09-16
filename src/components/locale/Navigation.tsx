@@ -1,225 +1,170 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { ThemeToggle } from '../ui/theme-toggle';
-import LocaleSwitcher from './LocaleSwitcher';
-import NavigationLink from './NavigationLink';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useScrollHeader } from "@/hooks/use-scroll-header";
+import { cn } from "@/lib/utils";
+import { useUserStore } from "@/store/userDataStore";
+import logoTheAttorneyNeg from "@assets/the-attorney-logo_neg.svg";
+import logoTheAttorneyPos from "@assets/the-attorney-logo_pos.svg";
+import { LogOut, Settings, User, UserRoundIcon } from "lucide-react";
+import { signOut as nextAuthSignOut, useSession } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { DashboardHeader } from "../dashboard/dashboard-header";
+import { Button } from "../ui/button";
+import LocaleSwitcher from "./LocaleSwitcher";
 
-export default function Navigation() {
-  const t = useTranslations('Navigation');
-  const pathname = usePathname();
-  const { data: session } = useSession();
-  const [isScrolled, setIsScrolled] = useState(false);
+interface HeaderProps {
+	clientRole: "ADMIN" | "USER" | null;
+}
 
-  // Esconder navegação apenas em páginas de auth
-  const hideNavigation = pathname.includes('/sign-in') || 
-                         pathname.includes('/sign-up') ||
-                         pathname.includes('/forgot-password') ||
-                         pathname.includes('/reset-password') ||
-                         pathname.includes('/verify-email') ||
-                         pathname.includes('/verify-code');
+export default function Header({ clientRole }: HeaderProps) {
+	const t = useTranslations("HomeData");
+	const locale = useLocale();
+	const isScrolled = useScrollHeader();
+	const router = useRouter();
+	const { clearUserData, firstName, lastName, email, photoUrl } = useUserStore();
+	const navigation = t.raw("headerData.navigation");
+  const logo = t.raw("headerData.logo");
+  const session = useSession();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 50;
-      setIsScrolled(scrolled);
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+	function signIn() {
+		clearUserData();
+		router.push(`/${locale}/sign-in`);
+	}
 
-  if (hideNavigation) {
-    return null;
-  }
+	async function handleSignOut() {
+		clearUserData();
+		await nextAuthSignOut({ callbackUrl: `/${locale}` });
+	}
 
-  return (
-    <header className={cn(
-      'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
-      isScrolled 
-        ? 'bg-background/95 backdrop-blur-md shadow-lg border-b border-border' 
-        : 'bg-transparent backdrop-blur-none'
-    )}>
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo e Links principais */}
-          <div className="flex items-center space-x-8">
-            <Link 
-              href="/" 
-              className={cn(
-                'text-xl font-bold transition-colors duration-300',
-                isScrolled 
-                  ? 'text-foreground hover:text-primary' 
-                  : 'text-white hover:text-white/80'
-              )}
-            >
-              Logo
-            </Link>
-            
-            <div className="hidden md:flex items-center space-x-6">
-              <NavigationLink 
-                href="/" 
-                className={cn(
-                  'font-medium transition-colors duration-300',
-                  isScrolled 
-                    ? 'text-foreground/80 hover:text-foreground' 
-                    : 'text-white/90 hover:text-white'
-                )}
-              >
-                {t('home')}
-              </NavigationLink>
-              
-              <NavigationLink 
-                href="/pathnames" 
-                className={cn(
-                  'font-medium transition-colors duration-300',
-                  isScrolled 
-                    ? 'text-foreground/80 hover:text-foreground' 
-                    : 'text-white/90 hover:text-white'
-                )}
-              >
-                {t('pathnames')}
-              </NavigationLink>
-              
-              {session?.user && (
-                <>
-                  <Link 
-                    href="/dashboard" 
-                    className={cn(
-                      'font-medium transition-colors duration-300',
-                      isScrolled 
-                        ? 'text-primary hover:text-primary/80' 
-                        : 'text-blue-200 hover:text-white'
-                    )}
-                  >
-                    {t('dashboard')}
-                  </Link>
-                  {session.user.role === 'ADMIN' && (
-                    <Link 
-                      href="/admin" 
-                      className={cn(
-                        'font-medium transition-colors duration-300',
-                        isScrolled 
-                          ? 'text-destructive hover:text-destructive/80' 
-                          : 'text-red-200 hover:text-white'
-                      )}
-                    >
-                      Admin
-                    </Link>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
+	const userInitials = `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`.toUpperCase();
 
-          {/* Área de autenticação e idioma */}
-          <div className="flex items-center space-x-4">
-            {session?.user ? (
-              <div className="flex items-center space-x-4">
-                <span className={cn(
-                  'hidden sm:inline-block text-sm font-medium transition-colors duration-300',
-                  isScrolled 
-                    ? 'text-foreground/60' 
-                    : 'text-white/80'
-                )}>
-                  {t('hello')}, {session.user.name || session.user.email}
-                </span>
-                <Link 
-                  href="/dashboard" 
-                  className={cn(
-                    'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300',
-                    'shadow-md hover:shadow-lg transform hover:scale-105',
-                    isScrolled 
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                      : 'bg-white/10 text-white backdrop-blur-sm hover:bg-white/20'
-                  )}
-                >
-                  {t('myAccount')}
+	return (
+		<div
+			className={cn(
+				"fixed z-50 h-20 w-full md:h-[100px] px-6 md:px-0 transition-all duration-500 ease-in-out",
+				!isScrolled ? "bg-transparent" : "bg-white/75 backdrop-blur-sm shadow-md",
+			)}
+		>
+			<div className="mx-auto flex h-full items-center justify-between md:container w-full">
+				<div className="flex items-center gap-4">
+					<Link href={`/${locale}`} className="flex items-center gap-2">
+						<Image
+							src={isScrolled ? logoTheAttorneyPos : logoTheAttorneyNeg}
+							alt={logo.logoText || ""}
+							width={isScrolled ? Number(logo.imagePos.width) : Number(logo.imageNeg.width)}
+							height={isScrolled ? Number(logo.imagePos.height) : Number(logo.imageNeg.height)}
+							className={cn("size-14 object-contain")}
+						/>
+						<h1 className={cn("text-xl font-medium uppercase font-serif", !isScrolled ? "text-white" : "text-black")}>
+							{logo.logoText}
+						</h1>
+					</Link>
+				</div>
+
+				<div className="flex items-center gap-4">
+					{navigation.map((item: any) => (
+						<Link
+							href={
+								item?.isAdmin
+									? `/${locale}${item.href}`
+									: item?.isClient
+										? `/${locale}${item.href}`
+										: item?.anchor || ""
+							}
+							key={item.id}
+							className={cn(
+								"cursor-pointer",
+								item.isAdmin && clientRole !== "ADMIN" && "hidden",
+								item.isAdmin && clientRole === "ADMIN" && "block",
+								item.isClient && clientRole !== "USER" && "hidden",
+								item.isClient && clientRole === "USER" && "block",
+							)}
+						>
+							<p className={cn("hidden md:block font-bold uppercase", !isScrolled ? "text-white" : "text-black")}>
+								{item.text}
+							</p>
+						</Link>
+					))}
+				</div>
+
+				<div className="flex items-center gap-4">
+					<Link href={`/${locale}`} className="cursor-pointer">
+						<LocaleSwitcher />
+					</Link>
+					{clientRole ? (
+           <div className="flex items-center space-x-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src={session.data?.user?.image || undefined} alt={session.data?.user?.name || ""} />
+                  <AvatarFallback>
+                    {session.data?.user?.name?.charAt(0) || session.data?.user?.email?.charAt(0) || "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    {session.data?.user?.name || "Usuário"}
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {session.data?.user?.email}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/profile" className="cursor-pointer">
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Meu Perfil</span>
                 </Link>
-              </div>
-            ) : (
-              <Link 
-                href="/sign-in" 
-                className={cn(
-                  'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300',
-                  'shadow-md hover:shadow-lg transform hover:scale-105',
-                  isScrolled 
-                    ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                    : 'bg-white/10 text-white backdrop-blur-sm hover:bg-white/20'
-                )}
-              >
-                {t('signIn')}
-              </Link>
-            )}
-            
-            <ThemeToggle />
-            <LocaleSwitcher />
-          </div>
-        </div>
-
-        {/* Menu mobile */}
-        <div className="md:hidden border-t border-border/20 pt-4 pb-3">
-          <div className="flex flex-col space-y-2">
-            <NavigationLink 
-              href="/" 
-              className={cn(
-                'font-medium transition-colors duration-300',
-                isScrolled 
-                  ? 'text-foreground/80 hover:text-foreground' 
-                  : 'text-white/90 hover:text-white'
-              )}
-            >
-              {t('home')}
-            </NavigationLink>
-            
-            <NavigationLink 
-              href="/pathnames" 
-              className={cn(
-                'font-medium transition-colors duration-300',
-                isScrolled 
-                  ? 'text-foreground/80 hover:text-foreground' 
-                  : 'text-white/90 hover:text-white'
-              )}
-            >
-              {t('pathnames')}
-            </NavigationLink>
-            
-            {session?.user && (
-              <>
-                <Link 
-                  href="/dashboard" 
-                  className={cn(
-                    'font-medium transition-colors duration-300',
-                    isScrolled 
-                      ? 'text-primary hover:text-primary/80' 
-                      : 'text-blue-200 hover:text-white'
-                  )}
-                >
-                  {t('dashboard')}
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings" className="cursor-pointer">
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Configurações</span>
                 </Link>
-                {session.user.role === 'ADMIN' && (
-                  <Link 
-                    href="/admin" 
-                    className={cn(
-                      'font-medium transition-colors duration-300',
-                      isScrolled 
-                        ? 'text-destructive hover:text-destructive/80' 
-                        : 'text-red-200 hover:text-white'
-                    )}
-                  >
-                    Admin
-                  </Link>
-                )}
-              </>
-            )}
-          </div>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem 
+                className="cursor-pointer"
+                onClick={() => handleSignOut()}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sair</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-      </nav>
-    </header>
-  );
+                    ) : (
+                        <Button variant="link" className="cursor-pointer" onClick={signIn}>
+                            <UserRoundIcon
+                                size={42}
+                                className={cn(
+                                    "transition-colors hover:text-accent cursor-pointer",
+                                    !isScrolled ? "text-accent" : "text-accent-foreground",
+                                )}
+                            />
+                        </Button>
+                    )}
+				</div>
+			</div>
+		</div>
+	);
 }

@@ -36,30 +36,35 @@ async function sendVerificationEmailInternal(email: string) {
   })
 
   // Enviar email
-  await resend.emails.send({
-    from: "noreply@claudiolins.dev",
-    to: email,
-    subject: "Código de Verificação - Boilerplate",
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #333; text-align: center;">Código de Verificação</h2>
-        <p style="color: #666; font-size: 16px;">
-          Olá! Use o código abaixo para verificar seu email:
-        </p>
-        <div style="background: #f5f5f5; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px;">
-          <h1 style="color: #333; font-size: 32px; margin: 0; letter-spacing: 4px;">
-            ${code}
-          </h1>
+  try {
+    await resend.emails.send({
+      from: "noreply@claudiolins.dev",
+      to: email,
+      subject: "Código de Verificação - Boilerplate",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333; text-align: center;">Código de Verificação</h2>
+          <p style="color: #666; font-size: 16px;">
+            Olá! Use o código abaixo para verificar seu email:
+          </p>
+          <div style="background: #f5f5f5; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px;">
+            <h1 style="color: #333; font-size: 32px; margin: 0; letter-spacing: 4px;">
+              ${code}
+            </h1>
+          </div>
+          <p style="color: #666; font-size: 14px;">
+            Este código expira em 10 minutos.
+          </p>
+          <p style="color: #666; font-size: 14px;">
+            Se você não solicitou este código, ignore este email.
+          </p>
         </div>
-        <p style="color: #666; font-size: 14px;">
-          Este código expira em 10 minutos.
-        </p>
-        <p style="color: #666; font-size: 14px;">
-          Se você não solicitou este código, ignore este email.
-        </p>
-      </div>
-    `,
-  })
+      `,
+    })
+  } catch (error) {
+    console.error("Erro ao enviar email de verificação via Resend:", error);
+    return { success: false, message: "Falha ao enviar o email de verificação." };
+  }
 
   return { success: true, message: "Código enviado com sucesso!" }
 }

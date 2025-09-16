@@ -53,8 +53,8 @@
   "auth": {
     "signIn": {
       "title": "Welcome back",
-      "description": "Login with your Google account",
-      "buttonGoogle": "Login with Google",
+      "description": "Login with your email and password",
+      "buttonGoogle": "Login with Email and Password",
       "or": "Or continue with",
       "labelEmail": "Email",
       "labelPassword": "Password",
@@ -69,10 +69,11 @@
     },
     "signUp": {
       "title": "Create an account",
-      "description": "Sign up with your Google account",
-      "buttonGoogle": "Sign up with Google",
+      "description": "Sign up with your email and password",
+      "buttonGoogle": "Sign up with Email and Password",
       "or": "Or continue with",
       "labelFullName": "Full Name",
+      "placeholderFullName": "John Doe",
       "labelEmail": "Email",
       "labelPassword": "Password",
       "labelConfirmPassword": "Confirm Password",
@@ -83,6 +84,187 @@
       "linkTermsOfService": "Terms of Service",
       "and": "and",
       "linkPrivacyPolicy": "Privacy Policy"
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "description": "Enter your email to receive the reset instructions",
+      "buttonSendInstructions": "Send instructions",
+      "alreadyHaveAccount": "Remember your password?",
+      "linkSignIn": "Sign in",
+      "placeholderEmail": "your@email.com",
+      "labelEmail": "Email",
+      "sentEmail": "Email Sent!",
+      "descriptionSentEmail": "Check your inbox and click the link to reset your password."
     }
-  }
+  },
+  "HomeData": {
+		"headerData": {
+			"id": 1,
+			"logo": {
+				"id": 1,
+				"logoText": "The Attorney",
+				"image": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				},
+				"imageNeg": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				},
+				"imagePos": {
+					"id": 6,
+					"documentId": "z95p3lp5vqyvqwr1nr8nsdq2",
+					"url": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106782/logo_3946fa5399.jpg",
+					"alternativeText": null,
+					"width": 640,
+					"height": 640
+				}
+			},
+			"navigation": [
+				{
+					"id": 3,
+					"text": "About",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#about"
+				},
+				{
+					"id": 4,
+					"text": "Services",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#services"
+				},
+				{
+					"id": 5,
+					"text": "FAQs",
+					"href": null,
+					"isAdmin": false,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "#faqs"
+				},
+				{
+					"id": 6,
+					"text": "Admin",
+					"href": "/admin/dashboard",
+					"isAdmin": true,
+					"isClient": false,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "/admin/dashboard"
+				},
+				{
+					"id": 7,
+					"text": "Dashboard",
+					"href": "/client/dashboard",
+					"isAdmin": false,
+					"isClient": true,
+					"isExterna": false,
+					"whatsAppMessage": null,
+					"anchor": "/client/dashboard"
+				}
+			]
+		},
+		"heroSectionData": {
+			"title": "The Attorney",
+			"name": "António Tavares Júnior",
+			"description": "Specialized in immigration, Portuguese nationality and processes with AIMA and SEF. Ensure your residence, citizenship and regularization with safety and efficiency.",
+			"heroImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106197/ruthson_zimmerman_Ws4wd_v_J9_M0_unsplash_a9721a9783.jpg",
+			"heroImageAlt": "António Tavares Júnior",
+			"buttonText": "Let's Talk"
+		},
+		"aboutSectionData": {
+			"name": "António Tavares Júnior",
+			"description": "António Tavares Júnior is a lawyer specializing in Immigration Law, with extensive experience in providing legal assistance to foreigners who wish to establish residency in Portugal.\nWith a solid educational background and in-depth knowledge of Portuguese and European immigration legislation, António has dedicated his career to facilitating the integration process for people of various nationalities in Portuguese territory.\n\nHis practice covers all areas of Immigration Law, from obtaining visas and residence permits to Portuguese nationality processes, family reunification, and administrative appeals before AIMA (Agency for Immigration, Mobility, and Asylum).\n\nAntónio Tavares Júnior stands out for his personalized and humanized approach, understanding that each case has unique aspects that require tailored solutions. His commitment is to transform the complex immigration process into a clearer and more accessible journey for his clients.\n\nWith a track record of successful cases and recognition in the legal field, António remains a reference for those seeking safe and effective guidance on immigration matters in Portugal.",
+			"aboutImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106196/depositphotos_118543600_stock_photo_handsome_caucasian_lawyer_74282f1342.webp",
+			"aboutImageAlt": "António Tavares Júnior",
+			"aboutOrdemImage": "https://res.cloudinary.com/dmqiaxl4e/image/upload/v1748106196/Ordem_dos_Advogados_e5b2c011be.png",
+			"aboutOrdemImageAlt": "Ordem dos Advogados",
+			"buttonText": "Contact"
+		},
+		"servicesSectionData": {
+			"title": "Services",
+			"description": "We offer a wide range of services to help you with your immigration needs.",
+			"buttonService": "Read more",
+			"services": [
+				{
+					"title": "Residence Authorization",
+					"topics": [
+						"Obtaining visas and residence permits for work, study, or investment.",
+						"Regularization of immigrants already in Portugal.",
+						"Advisory services for Golden Visa and other special regimes."
+					],
+					"description": "Obtaining visas and residence permits for work, study, or investment. Our specialized immigration team can help you navigate the process of obtaining residence authorization in Portugal. Additionally, we offer advisory services for obtaining the Golden Visa and other special regimes, ensuring you have all the necessary information for a smooth transition."
+				},
+				{
+					"title": "Portuguese Nationality and Citizenship",
+					"topics": [
+						"Acquisition of citizenship by descent (Portuguese parents, grandparents, or great-grandparents).",
+						"Naturalization through residence time in Portugal.",
+						"Citizenship for spouses of Portuguese citizens.",
+						"Citizenship for children of Portuguese citizens.",
+						"Citizenship for parents of Portuguese citizens."
+					],
+					"description": "Acquisition of citizenship by descent (Portuguese parents, grandparents, or great-grandparents). Our team can help you understand the requirements and processes involved in acquiring Portuguese citizenship, whether by descent or naturalization. Additionally, we provide guidance for spouses, children, and parents of Portuguese citizens seeking to obtain citizenship."
+				},
+				{
+					"title": "Family Reunification",
+					"topics": [
+						"Processes to bring family members to live legally in Portugal.",
+						"Advisory services to ensure proof of family ties."
+					],
+					"description": "Processes to bring family members to live legally in Portugal. Our team can help you understand the processes and requirements for family reunification in Portugal, ensuring you have all the necessary information for a smooth family reunion."
+				},
+				{
+					"title": "Appeals and Contests",
+					"topics": [
+						"Defense against visa or residence permit denials.",
+						"Representation in cases of expulsion or deportation.",
+						"Administrative appeals before AIMA (Agency for Immigration, Mobility, and Asylum) and SEF."
+					],
+					"description": "Defense against visa or residence permit denials. Our team can help you defend your rights in cases of visa or residence permit denials, as well as represent you in cases of expulsion or deportation. Additionally, we offer administrative appeals to ensure you have every opportunity to defend your case."
+				},
+				{
+					"title": "Corporate and Worker Advisory",
+					"topics": [
+						"Obtaining authorizations for foreign professionals to work legally in Portugal.",
+						"Advisory services for companies hiring foreign labor."
+					],
+					"description": "Advisory services for companies hiring foreign labor. Our team can help you understand the processes and requirements for hiring foreign labor in Portugal, ensuring you have all the necessary information for legal and secure hiring."
+				},
+				{
+					"title": "International Protection and Asylum",
+					"topics": [
+						"Guidance for refugees and asylum seekers.",
+						"Legal process for obtaining humanitarian protection."
+					],
+					"description": "Guidance for refugees and asylum seekers. Our team can help you understand the processes and requirements for obtaining international protection and asylum in Portugal, ensuring you have all the necessary information for a successful application."
+				},
+				{
+					"title": "Fiscal and Legal Regularization",
+					"topics": [
+						"Support in obtaining the NIF (Tax Identification Number).",
+						"Registration with Social Security for access to benefits and rights."
+					],
+					"description": "Support in obtaining the NIF (Tax Identification Number). Our team can help you understand the processes and requirements for obtaining the NIF and registering with Social Security in Portugal, ensuring you have all the necessary information for smooth fiscal and legal integration."
+				}
+			]
+		}
+	}
 }
