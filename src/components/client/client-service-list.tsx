@@ -378,6 +378,8 @@ export function ClientServiceList({ id, isAdmin }: ClientServiceListProps) {
 										</div>
 									)}
 
+									{isAdmin && (
+										<>
 									<button
 										type="button"
 										title="Editar serviço"
@@ -391,8 +393,10 @@ export function ClientServiceList({ id, isAdmin }: ClientServiceListProps) {
 										title="Remover serviço"
 										className="group/btn inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 bg-white hover:bg-red-50 hover:border-red-300 transition-all duration-200 hover:shadow-sm"
 									>
-										<Trash2 className="w-4 h-4 text-slate-600 group-hover/btn:text-red-600 transition-colors" />
-									</button>
+											<Trash2 className="w-4 h-4 text-slate-600 group-hover/btn:text-red-600 transition-colors" />
+											</button>
+											</>
+									)}
 								</div>
 							</div>
 						</div>
