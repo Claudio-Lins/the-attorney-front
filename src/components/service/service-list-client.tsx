@@ -1,5 +1,7 @@
 "use client";
 
+import { AnimatedList } from "@/components/ui/animated-list";
+import { AuroraText } from "@/components/ui/aurora-text";
 import { Building2, Edit, Loader2, Plus, Search, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
@@ -106,7 +108,7 @@ export function ServiceListClient() {
 						<div className="flex items-center space-x-2">
 							<Building2 className="h-5 w-5 text-slate-600" />
 							<div>
-								<CardTitle className="text-xl font-semibold text-slate-900">Serviços Jurídicos</CardTitle>
+								<CardTitle className="text-xl font-semibold text-slate-900"><AuroraText>Serviços Jurídicos</AuroraText></CardTitle>
 								<CardDescription className="text-slate-600">
 									Gerencie os serviços oferecidos pelo escritório
 								</CardDescription>
@@ -173,7 +175,7 @@ export function ServiceListClient() {
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{filteredServices.map((service) => (
+										{filteredServices.map((service) => (
 										<TableRow key={service.id} className="hover:bg-slate-50">
 											<TableCell>
 												<div>

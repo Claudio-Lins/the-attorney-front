@@ -1,3 +1,4 @@
+import { Footer } from '@/components/footer';
 import Navigation from '@/components/locale/Navigation';
 import { auth } from '@/lib/auth';
 import { Role } from '@/store/userDataStore';
@@ -16,6 +17,7 @@ export default async function PublicLayout({
       <main className="flex-1">
         {children}
       </main>
+      <Footer />
     </div>
   );
 } 

@@ -1,6 +1,16 @@
 'use client';
 
+import { AuroraText } from "@/components/ui/aurora-text";
 import { IconDashboard, IconFileDescription, IconUser, IconUsers } from "@tabler/icons-react";
+
+export function AuroraTextDemo() {
+  return (
+    <h1 className="text-4xl font-bold tracking-tighter md:text-5xl lg:text-7xl">
+      Ship <AuroraText>beautiful</AuroraText>
+    </h1>
+  );
+}
+
 import * as React from "react";
 
 import { NavMain } from "@/components/sidebar/nav-main";
@@ -41,7 +51,7 @@ const data = {
 	],
 	navClient: [
 		{
-			title: "Dashboard",
+			title: "Serviços",
 			url: "/client/dashboard",
 			icon: IconDashboard,
 		},
@@ -76,7 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						<SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
 							<Link prefetch href={`/${locale}`} className="flex flex-col items-center gap-2 justify-center h-auto">
 								<Image src={logoTheAttorney} alt="The Attorney" width={50} height={50} />
-								<span className="text-xl font-bold text-blue-800">The Attorney</span>
+								<h2 className="text-xl font-bold text-blue-800"><AuroraText>The Attorney</AuroraText></h2>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

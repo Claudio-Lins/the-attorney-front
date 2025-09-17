@@ -1,3 +1,4 @@
+
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { ToastProvider } from '@/components/providers/toast-provider';
 import { routing } from '@/i18n/routing';
@@ -50,7 +51,16 @@ export default async function LocaleLayout({
 
   return (
     <html className="h-full" lang={locale} suppressHydrationWarning>
-      <body className={cn(geistSans.variable, geistMono.variable, 'h-full')}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        />
+      </head>
+      <body className={cn(geistSans.variable, geistMono.variable, 'h-full bg-blue-950')}>
         <ThemeProvider>
           <SessionProvider>
             <NextIntlClientProvider>
