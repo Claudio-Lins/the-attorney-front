@@ -5,17 +5,17 @@
   },
   "IndexPage": {
     "description": "Este é um exemplo básico que demonstra o uso do <code>next-intl</code> com o Next.js App Router. Tente alterar o idioma no canto superior direito e veja como o conteúdo muda.",
-    "title": "exemplo next-intl"
+    "title": "The Attorney"
   },
   "LocaleLayout": {
-    "title": "exemplo next-intl"
+    "title": "The Attorney"
   },
   "LocaleSwitcher": {
     "label": "Alterar idioma",
     "locale": "{locale, select, en {🇺🇸 Inglês} pt {🇧🇷 Português} other {🌍 {locale}}}"
   },
   "Manifest": {
-    "name": "exemplo next-intl"
+    "name": "The Attorney"
   },
   "Navigation": {
     "home": "Início",
