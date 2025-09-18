@@ -5,11 +5,11 @@ import { signInWithCredentials } from "@/actions/auth-actions";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -42,9 +42,27 @@ export function LoginForm({
       const result = await signInWithCredentials(formData);
       
       if (result.success) {
-        // On success, do a hard navigation to the dashboard to ensure all server
-        // components and client components are re-rendered with the new session.
-        window.location.href = '/en/dashboard';
+        // Aguardar um pouco para garantir que a sessão foi criada
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Obter a sessão atualizada
+        const response = await fetch('/api/auth/session');
+        const session = await response.json();
+        
+        if (session?.user?.role) {
+          // Redirecionar baseado no papel do usuário
+          if (session.user.role === 'ADMIN') {
+            window.location.href = `/${locale}/admin/dashboard`;
+          } else if (session.user.role === 'USER') {
+            window.location.href = `/${locale}/client/dashboard`;
+          } else {
+            // Fallback para role desconhecido
+            window.location.href = `/${locale}/client/dashboard`;
+          }
+        } else {
+          // Fallback se não conseguir obter o role
+          window.location.href = `/${locale}/client/dashboard`;
+        }
         return; // Stop execution to allow the redirect to happen
       }
 

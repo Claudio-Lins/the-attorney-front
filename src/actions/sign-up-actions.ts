@@ -8,16 +8,16 @@ const signUpInternal = async (formData: FormData) => {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const passportNumber = formData.get("passportNumber") as string | null;
+  const clientId = formData.get("clientId") as string | null;
 
   const validatedData = userSchema.parse({ name, email, password });
   const hashedPassword = await hash(validatedData.password, 10);
 
-  if (passportNumber) {
+  if (clientId) {
     // --- Client Activation Flow ---
     try {
       const client = await prisma.client.findUnique({
-        where: { passport_number: passportNumber },
+        where: { client_id: clientId },
       });
 
       if (!client) {

@@ -8,6 +8,8 @@ interface ClientDashboardPageProps {}
 export default async function ClientDashboardPage({}: ClientDashboardPageProps) {
 	const session = await auth();
 
+	console.log("session", session);
+
 	if (!session?.user) {
 		return notFound();
 	}

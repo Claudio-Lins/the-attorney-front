@@ -1,4 +1,8 @@
+"use client";
+
+import { sendInvitationAction } from "@/actions/send-invitation-action";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { address, client } from "@/generated/prisma/client";
@@ -16,7 +20,8 @@ import {
 	UserCheck,
 	Users,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { EditClientDialog } from "./edit-client-dialog";
 
@@ -25,6 +30,30 @@ interface ClientDataProps {
 }
 
 export function ClientCard({ clientData }: ClientDataProps) {
+	const [isSending, setIsSending] = useState(false);
+
+	const handleSendInvitation = async () => {
+		setIsSending(true);
+		try {
+			const result = await sendInvitationAction({
+				passportNumber: clientData.passport_number,
+				email: clientData.email,
+				phone: clientData.phone,
+			});
+
+			if (result === "ok") {
+				toast.success("Convite enviado com sucesso!");
+			} else {
+				toast.error("Falha ao enviar convite. Verifique o console para mais detalhes.");
+			}
+		} catch (error) {
+			console.error("Erro ao enviar convite:", error);
+			toast.error("Ocorreu um erro inesperado.");
+		} finally {
+			setIsSending(false);
+		}
+	};
+
 	const formatDate = (date: Date | string | undefined) => {
 		if (!date) return "N/A";
 		return new Date(date).toLocaleDateString("pt-PT", {
@@ -131,8 +160,15 @@ export function ClientCard({ clientData }: ClientDataProps) {
 							</div>
 						</div>
 
-						<div className="sm:w-auto self-start sm:self-center">
+						<div className="sm:w-auto self-start sm:self-center flex items-center gap-2">
 							<EditClientDialog clientData={clientData} />
+							{clientData.userId ? (
+								<Badge variant="default">Ativo</Badge>
+							) : (
+								<Button onClick={handleSendInvitation} disabled={isSending}>
+									{isSending ? "Enviando..." : "Enviar Convite"}
+								</Button>
+							)}
 						</div>
 					</div>
 				</CardHeader>

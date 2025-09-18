@@ -20,13 +20,13 @@ import { redirect } from "next/navigation";
 import { Separator } from "./ui/separator";
 
 interface SignUpFormProps extends React.ComponentProps<"div"> {
-  passportNumber?: string | undefined;
+  clientId?: string | undefined;
   email?: string;
 }
 
 export async function SignUpForm({
   className,
-  passportNumber,
+  clientId,
   email,
   ...props
 }: SignUpFormProps) {
@@ -101,8 +101,8 @@ export async function SignUpForm({
                   <Label htmlFor="password">{t('labelPassword')}</Label>
                   <Input id="password" type="password" name="password" required />
                 </div>
-                {passportNumber && (
-                  <input type="hidden" name="passportNumber" value={passportNumber} />
+                {clientId && (
+                  <input type="hidden" name="clientId" value={clientId} />
                 )}
                 <Button type="submit" className="w-full" >
                   

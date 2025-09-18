@@ -12,10 +12,10 @@ interface ClientTabsProps {
 
 export function ClientTabs({ clientId, clientData }: ClientTabsProps) {
 	return (
-		<Tabs defaultValue="services" className="w-full">
+		<Tabs defaultValue="client-data" className="w-full">
 			<TabsList>
-				<TabsTrigger value="services">Serviços vinculados</TabsTrigger>
 				<TabsTrigger value="client-data">Dados do cliente</TabsTrigger>
+				<TabsTrigger value="services">Serviços vinculados</TabsTrigger>
 			</TabsList>
 			<TabsContent value="services">
 				<ClientServiceList id={clientId} isAdmin={true} />
