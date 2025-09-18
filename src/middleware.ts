@@ -27,6 +27,30 @@ export default async function middleware(request: NextRequest) {
       const signInUrl = new URL(`/${locale}/sign-in`, request.url);
       return NextResponse.redirect(signInUrl);
     }
+
+    // Verificar autorização baseada em ROLE
+    const userRole = session.user.role;
+    const localeMatch = pathname.match(/^\/([a-z]{2})\//);
+    const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
+
+    // Verificar se usuário está tentando acessar rota de admin
+    const isAdminRoute = pathname.match(/^\/[a-z]{2}\/admin/);
+    // Verificar se usuário está tentando acessar rota de client
+    const isClientRoute = pathname.match(/^\/[a-z]{2}\/client/);
+
+    if (isAdminRoute && userRole !== 'ADMIN') {
+      // Usuário não-admin tentando acessar rotas de admin
+      // Redirecionar para dashboard do cliente
+      const clientDashboardUrl = new URL(`/${locale}/client/dashboard`, request.url);
+      return NextResponse.redirect(clientDashboardUrl);
+    }
+
+    if (isClientRoute && userRole !== 'USER') {
+      // Usuário admin tentando acessar rotas de cliente
+      // Redirecionar para dashboard de admin
+      const adminDashboardUrl = new URL(`/${locale}/admin/dashboard`, request.url);
+      return NextResponse.redirect(adminDashboardUrl);
+    }
   }
 
   // Aplicar middleware de internacionalização
