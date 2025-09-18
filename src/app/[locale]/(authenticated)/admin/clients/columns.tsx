@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ClientSchema } from "@/zod-schemas/client-schema";
 import { ColumnDef } from "@tanstack/react-table";
@@ -41,6 +42,20 @@ export const columns: ColumnDef<ClientSchema>[] = [
 				<div className="text-sm">{email}</div>
 			) : (
 				<div className="text-sm text-slate-400 italic">Não informado</div>
+			);
+		},
+	},
+	{
+		accessorKey: "status",
+		header: "Status",
+		cell: ({ row }) => {
+			const client = row.original;
+			const isAuthenticated = !!client.userId;
+
+			return isAuthenticated ? (
+				<Badge variant="default">Ativo</Badge>
+			) : (
+				<Badge variant="destructive">Pendente</Badge>
 			);
 		},
 	},

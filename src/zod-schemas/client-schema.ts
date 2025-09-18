@@ -24,6 +24,7 @@ export const clientSchema = z.object({
 	role: roleEnum,
 	photo_url: z.string().url().nullable().optional(),
 	address: addressArraySchema.optional(), // relacionamento com endereços
+	userId: z.string().nullable().optional(),
 });
 
 // Exporta o tipo inferido
