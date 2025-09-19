@@ -42,7 +42,6 @@ export default async function AuthenticatedLayout({
 			<SidebarInset>
 				<SiteHeader />
 				<div className="flex flex-col p-4 min-h-dvh w-full bg-background overflow-y-hidden">
-					{/* Verificador de dados do cliente */}
 					<ClientDataVerifier clientRole={clientRole} />
 					{children}
 				</div>

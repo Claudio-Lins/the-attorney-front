@@ -8,7 +8,7 @@ export function ToastProvider() {
 
   return (
     <Toaster
-      position="top-right"
+      position="bottom-right"
       theme={theme as 'light' | 'dark' | 'system'}
       richColors
       closeButton
@@ -19,6 +19,7 @@ export function ToastProvider() {
           background: 'hsl(var(--background))',
           color: 'hsl(var(--foreground))',
           border: '1px solid hsl(var(--border))',
+          zIndex: 9999,
         },
       }}
     />

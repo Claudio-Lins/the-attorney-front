@@ -73,7 +73,7 @@ export default function LocaleSwitcherSelect({
         'pointer-events-none absolute right-2 top-[10px] transition-colors duration-300',
         isScrolled ? 'text-foreground/40' : 'text-white/60'
       )}>
-        <svg 
+        {/* <svg 
           className="w-4 h-4" 
           fill="none" 
           stroke="currentColor" 
@@ -85,7 +85,7 @@ export default function LocaleSwitcherSelect({
             strokeWidth={2} 
             d="M19 9l-7 7-7-7" 
           />
-        </svg>
+        </svg> */}
       </span>
     </label>
   );

@@ -38,8 +38,6 @@ export default async function ClientPage({
 		return (
 			<div className="flex flex-col gap-4">
 				<ClientTabs clientId={client.id} clientData={client} />
-				{/* <ClientCard clientData={client} /> */}
-				{/* <ClientServiceList id={client.id} isAdmin={true} /> */}
 			</div>
 		);
 	} catch (error) {

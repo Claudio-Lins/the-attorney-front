@@ -48,7 +48,8 @@ export function DocumentCard({ file }: DocumentCardProps) {
 	const [loading, setLoading] = useState(true);
 
 	const [dialogOpen, setDialogOpen] = useState(false);
-	const fileName = file.name.split("/")[1] || file.name;
+	// const fileName = file.name.split("/")[1] || file.name;
+	const fileName = file.name.slice(24).replaceAll("-", " ").split("_")[0].toUpperCase();
 
 	useEffect(() => {
 		async function loadFileData() {
@@ -197,7 +198,7 @@ export function DocumentCard({ file }: DocumentCardProps) {
 	return (
 		<>
 			<Card
-				className="relative w-full aspect-square overflow-hidden group cursor-pointer hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/30"
+				className="relative w-full aspect-auto h-80 overflow-hidden group cursor-pointer hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/30"
 				onClick={handleCardClick}
 				aria-label={`Documento ${fileName}, ${getFileType()}, tamanho: ${fileData?.fileSize || "carregando"}`}
 			>
@@ -206,7 +207,7 @@ export function DocumentCard({ file }: DocumentCardProps) {
 					{loading ? (
 						<div className="w-full h-full bg-gray-100 flex items-center justify-center">
 							<div className="animate-pulse">
-								<FileText className="w-16 h-16 text-gray-300" />
+								<FileText className="w-10 h-10 text-gray-300" />
 							</div>
 						</div>
 					) : fileData?.isImage ? (
@@ -249,10 +250,6 @@ export function DocumentCard({ file }: DocumentCardProps) {
 					<div className="absolute inset-0 flex flex-col justify-between p-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300">
 						{/* Header com tipo de arquivo e tamanho */}
 						<div className="flex justify-between items-start">
-							{/* <Badge variant="secondary" className="bg-white/20 text-white border-0 backdrop-blur-sm">
-								<span className="mr-1">{getFileIcon()}</span>
-								{getFileType()}
-							</Badge> */}
 							{fileData?.fileSize && (
 								<Badge variant="outline" className="bg-black/30 text-white border-white/30 backdrop-blur-sm">
 									{fileData.fileSize}

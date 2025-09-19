@@ -18,7 +18,7 @@ export async function processStatus(data: ProcessStatusProps): Promise<string | 
 	console.log("process.env.PROCESS_STATUS_WEBHOOK:", process.env.PROCESS_STATUS_WEBHOOK);
 	console.log("Todas as env vars relacionadas a webhook:", {
 		PROCESS_STATUS_WEBHOOK: process.env.PROCESS_STATUS_WEBHOOK,
-		POWER_ATTORNEY_WEBHOOK: process.env.POWER_ATTORNEY_WEBHOOK,
+		POWER_ATTORNEY_NACIONALIDADE_WEBHOOK: process.env.POWER_ATTORNEY_NACIONALIDADE_WEBHOOK,
 		CREATE_CLIENT_WEBHOOK: process.env.CREATE_CLIENT_WEBHOOK,
 	});
 	console.log("Dados a serem enviados:", JSON.stringify(data, null, 2));

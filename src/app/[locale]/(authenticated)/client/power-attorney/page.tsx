@@ -18,6 +18,7 @@ export default function PowerAttorney({}: PowerAttorneyProps) {
 			setIsLoading(true);
 			const result = await getPowerAttorneyDocuments();
 			setDocuments(result);
+			console.log("Power Attorney Documents", documents);
 		} catch (error) {
 			console.error("Erro ao carregar procurações:", JSON.stringify(error, null, 2));
 			setDocuments({
