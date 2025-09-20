@@ -34,7 +34,7 @@ export function NavMain({
 						<SidebarMenuItem
 							key={item.title}
 							className={cn(
-								pathname === `/${locale}${item.url}` &&
+								pathname.startsWith(`/${locale}${item.url}`) &&
 									"bg-gradient-to-r from-blue-900 to-blue-600 rounded-md text-white",
 								"hover:bg-blue-900/10 hover:text-blue-900",
 							)}

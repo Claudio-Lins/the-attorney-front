@@ -91,3 +91,25 @@ export async function getPowerAttorneyDocuments(): Promise<DocumentResponse> {
 		};
 	}
 }
+
+export async function getPowerAttorneyFiles(clientId: string): Promise<SupabaseFile[]> {
+    try {
+        const clientFolder = `${clientId}/power-attorney/`;
+        const files = await listFilesInPath(clientFolder);
+        
+        const validFiles = files.filter(file => file.name.includes(".") && file.metadata && file.metadata.size > 0);
+
+        const filesWithFullPath = validFiles.map((file) => {
+            const fileNameOnly = file.name.split('/').pop();
+            return {
+			    ...file,
+			    name: `${clientId}/power-attorney/${fileNameOnly}`,
+		    };
+        });
+
+        return filesWithFullPath;
+    } catch (error) {
+        console.error("Erro ao buscar arquivos de procuração:", error);
+        return [];
+    }
+}

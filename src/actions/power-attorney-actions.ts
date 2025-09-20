@@ -10,7 +10,7 @@ const webhooks = {
     },
     RESIDENCIA: {
         url: process.env.POWER_ATTORNEY_RESIDENCIA_WEBHOOK,
-        name: "Procuração para Autorização de Residência",
+        name: "Procuração para Residência",
     },
     REAGRUPAMENTO: {
         url: process.env.POWER_ATTORNEY_REAGRUPAMENTO_WEBHOOK,
@@ -96,6 +96,7 @@ export async function triggerPowerAttorneyWebhook(
         passport_issue_date: formatDate(clientData.passport_issue_date),
         nationality: clientData.nationality,
         phone: clientData.phone,
+        whatsapp: clientData.whatsapp,
         photo_url: clientData.photo_url,
         country_of_birth: clientData.country_of_birth,
         date_of_birth: formatDate(clientData.date_of_birth),
