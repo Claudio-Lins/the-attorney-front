@@ -38,10 +38,10 @@ export default async function ClientPage({
 		return (
 			<div className="flex flex-col gap-4">
 				<div>
-					<h1 className="text-3xl font-bold text-slate-900">
+					<h1 className="text-xl md:text-3xl font-bold text-slate-900">
 						{client.first_name} {client.last_name}
 					</h1>
-					<p className="text-slate-600 mt-1">
+					<p className="text-slate-600 mt-1 text-sm md:text-base">
 						Detalhes do cliente - ID: {client.client_id}
 					</p>
 				</div>

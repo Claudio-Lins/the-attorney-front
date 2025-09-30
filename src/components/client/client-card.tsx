@@ -1,552 +1,514 @@
-"use client";
+"use client"
 
-import { sendInvitationAction } from "@/actions/send-invitation-action";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { address, client } from "@/generated/prisma/client";
+import { sendInvitationAction } from "@/actions/send-invitation-action"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import type { address, client } from "@/generated/prisma/client"
 import {
-	BookOpen,
 	Building2,
 	Calendar,
 	Clock,
 	FileText,
-	Gavel,
 	Globe,
 	Home,
 	Mail,
 	MapPin,
 	Phone,
-	Scale,
 	Shield,
 	User,
 	UserCheck,
 	Users,
-} from "lucide-react";
-import React, { useState } from "react";
-import { toast } from "sonner";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { EditClientDialog } from "./edit-client-dialog";
+} from "lucide-react"
+import type React from "react"
+import { useState } from "react"
+import { toast } from "sonner"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { EditClientDialog } from "./edit-client-dialog"
 
 interface ClientDataProps {
-	clientData: client & { address?: address[] };
+  clientData: client & { address?: address[] }
 }
 
 export function ClientCard({ clientData }: ClientDataProps) {
-	const [isSending, setIsSending] = useState(false);
+  const [isSending, setIsSending] = useState(false)
 
-	const handleSendInvitation = async () => {
-		setIsSending(true);
-		try {
-			const result = await sendInvitationAction({
-				passportNumber: clientData.passport_number,
-				email: clientData.email,
-				phone: clientData.phone,
-			});
+  const handleSendInvitation = async () => {
+    setIsSending(true)
+    try {
+      const result = await sendInvitationAction({
+        passportNumber: clientData.passport_number,
+        email: clientData.email,
+        phone: clientData.phone,
+      })
 
-			if (result === "ok") {
-				toast.success("Convite enviado com sucesso!");
-			} else {
-				toast.error("Falha ao enviar convite. Verifique o console para mais detalhes.");
-			}
-		} catch (error) {
-			console.error("Erro ao enviar convite:", error);
-			toast.error("Ocorreu um erro inesperado.");
-		} finally {
-			setIsSending(false);
-		}
-	};
+      if (result === "ok") {
+        toast.success("Convite enviado com sucesso!")
+      } else {
+        toast.error("Falha ao enviar convite. Verifique o console para mais detalhes.")
+      }
+    } catch (error) {
+      console.error("Erro ao enviar convite:", error)
+      toast.error("Ocorreu um erro inesperado.")
+    } finally {
+      setIsSending(false)
+    }
+  }
 
-	const formatDate = (date: Date | string | undefined) => {
-		if (!date) return "N/A";
-		return new Date(date).toLocaleDateString("pt-PT", {
-			day: "2-digit",
-			month: "2-digit",
-			year: "numeric",
-		});
-	};
+  const formatDate = (date: Date | string | undefined) => {
+    if (!date) return "N/A"
+    return new Date(date).toLocaleDateString("pt-PT", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+  }
 
-	const formatDateTime = (date: Date | string) => {
-		return new Date(date).toLocaleString("pt-PT", {
-			day: "2-digit",
-			month: "2-digit",
-			year: "numeric",
-			hour: "2-digit",
-			minute: "2-digit",
-		});
-	};
+  const formatDateTime = (date: Date | string) => {
+    return new Date(date).toLocaleString("pt-PT", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+  }
 
-	const getGenderLabel = (gender: string | null) => {
-		if (!gender) return "N/A";
-		return gender === "M" ? "Masculino" : "Feminino";
-	};
+  const getGenderLabel = (gender: string | null) => {
+    if (!gender) return "N/A"
+    return gender === "M" ? "Masculino" : "Feminino"
+  }
 
-	const getMaritalStatusLabel = (status: string | null) => {
-		if (!status) return "N/A";
-		const statusMap = {
-			SINGLE: "Solteiro(a)",
-			MARRIED: "Casado(a)",
-			DIVORCED: "Divorciado(a)",
-			WIDOWED: "Viúvo(a)",
-			SEPARATED: "Separado(a)",
-		};
-		return statusMap[status as keyof typeof statusMap] || status;
-	};
+  const getMaritalStatusLabel = (status: string | null) => {
+    if (!status) return "N/A"
+    const statusMap = {
+      SINGLE: "Solteiro(a)",
+      MARRIED: "Casado(a)",
+      DIVORCED: "Divorciado(a)",
+      WIDOWED: "Viúvo(a)",
+      SEPARATED: "Separado(a)",
+    }
+    return statusMap[status as keyof typeof statusMap] || status
+  }
 
-	const getInitials = (first_name: string, last_name: string) => {
-		return `${first_name.charAt(0)}${last_name.charAt(0)}`.toUpperCase();
-	};
+  const getInitials = (first_name: string, last_name: string) => {
+    return `${first_name.charAt(0)}${last_name.charAt(0)}`.toUpperCase()
+  }
 
-	const isPassportExpiringSoon = (passport_expiry: Date | null) => {
-		if (!passport_expiry) return false;
-		const now = new Date();
-		const expiry = new Date(passport_expiry);
-		const diffTime = expiry.getTime() - now.getTime();
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		return diffDays <= 90 && diffDays > 0;
-	};
+  const isPassportExpiringSoon = (passport_expiry: Date | null) => {
+    if (!passport_expiry) return false
+    const now = new Date()
+    const expiry = new Date(passport_expiry)
+    const diffTime = expiry.getTime() - now.getTime()
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    return diffDays <= 90 && diffDays > 0
+  }
 
-	const isPassportExpired = (passport_expiry: Date | null) => {
-		if (!passport_expiry) return false;
-		return new Date(passport_expiry) < new Date();
-	};
+  const isPassportExpired = (passport_expiry: Date | null) => {
+    if (!passport_expiry) return false
+    return new Date(passport_expiry) < new Date()
+  }
 
-	const filiation = clientData.filiation as { father?: string; mother?: string } | null;
+  const filiation = clientData.filiation as { father?: string; mother?: string } | null
 
-	return (
-		<div className="w-full h-[calc(100vh-var(--header-height))] bg-slate-50">
-			{/* Header Professional - Estilo escritório de advocacia */}
-			<div className="bg-blue-800 rounded-2xl ">
-				<div className="px-6 py-6 border-b border-blue-700/50">
-					<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-						<div className="flex items-center gap-6">
-							{/* Avatar com estilo profissional */}
-							<div className="relative">
-								<Avatar className="w-20 h-20 border-4 border-amber-400/20 shadow-2xl ring-4 ring-blue-600/30 rounded-full">
-									<AvatarImage
-										src={clientData.photo_url ?? ""}
-										alt={`${clientData.first_name} ${clientData.last_name}`}
-									/>
-									<AvatarFallback className="text-xl font-bold bg-gradient-to-br from-amber-500 to-amber-600 text-slate-900">
-										{getInitials(clientData.first_name, clientData.last_name)}
-									</AvatarFallback>
-								</Avatar>
-								<div className="absolute -bottom-2 -right-2 w-7 h-7 bg-emerald-500 rounded-full border-4 border-blue-900 flex items-center justify-center shadow-lg">
-									<UserCheck className="w-4 h-4 text-white" />
-								</div>
-							</div>
+  const PersonalDataContent = () => (
+    <div className="space-y-6">
+      <Section title="Informações Pessoais" icon={<User className="w-5 h-5" />}>
+        <InfoGrid>
+          <InfoItem label="Nome Completo">
+            <span className="font-medium text-foreground">
+              {clientData.first_name} {clientData.last_name}
+            </span>
+          </InfoItem>
+          <InfoItem label="Data de Nascimento" icon={<Calendar className="w-4 h-4" />}>
+            <span className="font-medium text-foreground">{formatDate(clientData.date_of_birth ?? "")}</span>
+          </InfoItem>
+          <InfoItem label="Gênero">
+            <Badge variant="outline" className="font-normal">
+              {getGenderLabel(clientData.gender ?? "")}
+            </Badge>
+          </InfoItem>
+          <InfoItem label="Estado Civil">
+            <Badge variant="outline" className="font-normal">
+              {getMaritalStatusLabel(clientData.marital_status ?? "")}
+            </Badge>
+          </InfoItem>
+          <InfoItem label="Nacionalidade" icon={<Globe className="w-4 h-4" />}>
+            <span className="font-medium text-foreground">{clientData.nationality}</span>
+          </InfoItem>
+          <InfoItem label="País de Nascimento" icon={<MapPin className="w-4 h-4" />}>
+            <span className="font-medium text-foreground">{clientData.country_of_birth}</span>
+          </InfoItem>
+          <InfoItem label="Local de Nascimento">
+            <span className="font-medium text-foreground">{clientData.place_of_birth}</span>
+          </InfoItem>
+        </InfoGrid>
+      </Section>
 
-							<div className="space-y-3">
-								<div className="flex items-center gap-3">
-									<Scale className="w-5 h-5 text-amber-400" />
-									<CardTitle className="text-xl lg:text-2xl font-bold text-white tracking-tight">
-										{clientData.first_name} {clientData.last_name}
-									</CardTitle>
-								</div>
-								<div className="flex items-center flex-wrap gap-3">
-									<Badge variant="outline" className="bg-blue-800/50 border-blue-600 text-white font-mono text-xs">
-										<Building2 className="w-3 h-3 mr-2" />
-										Cliente ID: {clientData.client_id}
-									</Badge>
-									<Badge
-										variant={
-											isPassportExpired(clientData.passport_expiry)
-												? "destructive"
-												: isPassportExpiringSoon(clientData.passport_expiry)
-													? "secondary"
-													: "default"
-										}
-										className={`text-xs shadow-lg ${
-											isPassportExpired(clientData.passport_expiry)
-												? "bg-red-600/90 border-red-500"
-												: isPassportExpiringSoon(clientData.passport_expiry)
-													? "bg-amber-600/90 border-amber-500"
-													: "bg-emerald-600/90 border-emerald-500"
-										}`}
-									>
-										<Shield className="w-3 h-3 mr-2" />
-										{isPassportExpired(clientData.passport_expiry)
-											? "Documentação Expirada"
-											: isPassportExpiringSoon(clientData.passport_expiry)
-												? "Expiração Próxima"
-												: "Documentação Válida"}
-									</Badge>
-								</div>
-							</div>
-						</div>
+      <Section title="Filiação" icon={<Users className="w-5 h-5" />}>
+        <InfoGrid>
+          <InfoItem label="Nome do Pai">
+            <span className="font-medium text-foreground">{filiation?.father ?? "Não informado"}</span>
+          </InfoItem>
+          <InfoItem label="Nome da Mãe">
+            <span className="font-medium text-foreground">{filiation?.mother ?? "Não informado"}</span>
+          </InfoItem>
+        </InfoGrid>
+      </Section>
+    </div>
+  )
 
-						<div className="flex items-center gap-3">
-							<EditClientDialog clientData={clientData} />
-							{clientData.userId ? (
-								<Badge className="bg-emerald-600 text-white px-4 py-2 text-sm">
-									<Gavel className="w-4 h-4 mr-2" />
-									Cliente Ativo
-								</Badge>
-							) : (
-								<Button 
-									onClick={handleSendInvitation} 
-									disabled={isSending}
-									className="bg-amber-600 hover:bg-amber-700 text-slate-900 font-semibold px-6 py-2 shadow-lg"
-								>
-									<Mail className="w-4 h-4 mr-2" />
-									{isSending ? "Enviando..." : "Enviar Convite"}
-								</Button>
-							)}
-						</div>
-					</div>
-				</div>
-			</div>
+  const ContactContent = () => (
+    <div className="space-y-6">
+      <Section title="Informações de Contato" icon={<Mail className="w-5 h-5" />}>
+        <InfoGrid>
+          <InfoItem label="Email" icon={<Mail className="w-4 h-4" />}>
+            <span className="font-mono text-sm text-foreground">{clientData.email}</span>
+          </InfoItem>
+          <InfoItem label="Telefone" icon={<Phone className="w-4 h-4" />}>
+            <span className="font-mono text-sm text-foreground">{clientData.phone}</span>
+          </InfoItem>
+        </InfoGrid>
+      </Section>
 
-			{/* Área de Tabs - Estilo profissional */}
-			<div className="flex-1 bg-white">
-				<Tabs defaultValue="personal" className="h-full flex flex-col">
-					{/* Tab Navigation - Design advocacia */}
-					<div className="bg-white border-b border-slate-200 px-6 pt-4">
-						<TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-12 bg-slate-100 p-1 rounded-lg">
-							<TabsTrigger 
-								value="personal" 
-								className="gap-2 py-2 px-3 data-[state=active]:bg-blue-800 data-[state=active]:text-white data-[state=active]:shadow-lg font-semibold transition-all text-sm"
-							>
-								<User className="w-5 h-5" /> 
-								<span className="hidden sm:inline">Dados Pessoais</span>
-								<span className="sm:hidden">Pessoal</span>
-							</TabsTrigger>
-							<TabsTrigger 
-								value="contact" 
-								className="gap-2 py-2 px-3 data-[state=active]:bg-blue-800 data-[state=active]:text-white data-[state=active]:shadow-lg font-semibold transition-all text-sm"
-							>
-								<Mail className="w-4 h-4" /> 
-								<span className="hidden sm:inline">Contato</span>
-								<span className="sm:hidden">Contato</span>
-							</TabsTrigger>
-							<TabsTrigger 
-								value="passport" 
-								className="gap-2 py-2 px-3 data-[state=active]:bg-blue-800 data-[state=active]:text-white data-[state=active]:shadow-lg font-semibold transition-all text-sm"
-							>
-								<FileText className="w-4 h-4" /> 
-								<span className="hidden sm:inline">Documentação</span>
-								<span className="sm:hidden">Docs</span>
-							</TabsTrigger>
-							<TabsTrigger 
-								value="system" 
-								className="gap-2 py-2 px-3 data-[state=active]:bg-blue-800 data-[state=active]:text-white data-[state=active]:shadow-lg font-semibold transition-all text-sm"
-							>
-								<Clock className="w-4 h-4" /> 
-								<span className="hidden sm:inline">Sistema</span>
-								<span className="sm:hidden">Sistema</span>
-							</TabsTrigger>
-						</TabsList>
-					</div>
+      <Section title="Endereços" icon={<Home className="w-5 h-5" />}>
+        {clientData.address && clientData.address.length > 0 ? (
+          <div className="space-y-4">
+            {clientData.address.map((address, index) => (
+              <div key={address.id} className="border rounded-lg p-4 bg-muted/30">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-muted rounded-md flex items-center justify-center flex-shrink-0 mt-1">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <Badge variant="secondary" className="text-xs font-mono mb-2">
+                      Endereço {index + 1}
+                    </Badge>
+                    <p className="font-medium text-foreground">
+                      {address.street}, {address.number}
+                      {address.complement && `, ${address.complement}`}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {address.neighborhood} - {address.city}/{address.state}
+                    </p>
+                    <p className="text-sm text-muted-foreground font-mono">CEP: {address.zip_code}</p>
+                    <p className="text-sm text-muted-foreground">{address.country}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-muted/30 rounded-lg">
+            <Home className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+            <p className="text-sm text-muted-foreground">Nenhum endereço cadastrado</p>
+          </div>
+        )}
+      </Section>
+    </div>
+  )
 
-					{/* Tab Content - Dados Pessoais */}
-					<TabsContent value="personal" className="flex-1 overflow-y-auto bg-slate-50 p-6">
-						<div className="max-w-6xl mx-auto space-y-6">
-							<LawSection 
-								title="Informações Pessoais" 
-								icon={<User className="w-6 h-6 text-white" />} 
-								color="slate"
-							>
-								<LawGrid>
-									<LawInfoItem label="Data de Nascimento" icon={<Calendar />}>
-										<span className="font-mono text-slate-800">{formatDate(clientData.date_of_birth ?? "")}</span>
-									</LawInfoItem>
-									<LawInfoItem label="Gênero">
-										<Badge variant="outline" className="border-slate-300 text-slate-700">
-											{getGenderLabel(clientData.gender ?? "")}
-										</Badge>
-									</LawInfoItem>
-									<LawInfoItem label="Estado Civil">
-										<Badge variant="outline" className="border-slate-300 text-slate-700">
-											{getMaritalStatusLabel(clientData.marital_status ?? "")}
-										</Badge>
-									</LawInfoItem>
-									<LawInfoItem label="Nacionalidade" icon={<Globe />}>
-										<Badge className="bg-slate-800 text-amber-400 border-amber-400/30">
-											{clientData.nationality}
-										</Badge>
-									</LawInfoItem>
-									<LawInfoItem label="País de Nascimento" icon={<MapPin />}>
-										<span className="font-semibold text-slate-800">{clientData.country_of_birth}</span>
-									</LawInfoItem>
-									<LawInfoItem label="Local de Nascimento">
-										<span className="font-semibold text-slate-800">{clientData.place_of_birth}</span>
-									</LawInfoItem>
-								</LawGrid>
-							</LawSection>
+  const DocumentationContent = () => (
+    <Section title="Documentação" icon={<FileText className="w-5 h-5" />}>
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <InfoItem label="Número do Passaporte">
+              <div className="bg-muted px-4 py-2 rounded-md font-mono text-sm font-medium">
+                {clientData.passport_number}
+              </div>
+            </InfoItem>
+            <InfoItem label="Data de Emissão" icon={<Calendar className="w-4 h-4" />}>
+              <span className="font-mono text-sm text-foreground">
+                {formatDate(clientData.passport_issue_date ?? "")}
+              </span>
+            </InfoItem>
+            <InfoItem label="Data de Expiração" icon={<Calendar className="w-4 h-4" />}>
+              <div
+                className={`font-mono text-sm font-medium px-4 py-2 rounded-md ${
+                  isPassportExpired(clientData.passport_expiry)
+                    ? "bg-destructive/10 text-destructive"
+                    : isPassportExpiringSoon(clientData.passport_expiry)
+                      ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-500"
+                      : "bg-green-500/10 text-green-700 dark:text-green-500"
+                }`}
+              >
+                {formatDate(clientData.passport_expiry ?? "")}
+              </div>
+            </InfoItem>
+          </div>
+          <div className="bg-muted/50 rounded-lg p-6 border">
+            <div className="text-center space-y-3">
+              <div
+                className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center ${
+                  isPassportExpired(clientData.passport_expiry)
+                    ? "bg-destructive/20"
+                    : isPassportExpiringSoon(clientData.passport_expiry)
+                      ? "bg-yellow-500/20"
+                      : "bg-green-500/20"
+                }`}
+              >
+                <Shield
+                  className={`w-6 h-6 ${
+                    isPassportExpired(clientData.passport_expiry)
+                      ? "text-destructive"
+                      : isPassportExpiringSoon(clientData.passport_expiry)
+                        ? "text-yellow-600"
+                        : "text-green-600"
+                  }`}
+                />
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm mb-1">Status da Documentação</h4>
+                <p
+                  className={`text-xs font-medium ${
+                    isPassportExpired(clientData.passport_expiry)
+                      ? "text-destructive"
+                      : isPassportExpiringSoon(clientData.passport_expiry)
+                        ? "text-yellow-700 dark:text-yellow-500"
+                        : "text-green-700 dark:text-green-500"
+                  }`}
+                >
+                  {isPassportExpired(clientData.passport_expiry)
+                    ? "Expirado"
+                    : isPassportExpiringSoon(clientData.passport_expiry)
+                      ? "Expira em breve"
+                      : "Válido"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  )
 
-							<LawSection 
-								title="Filiação" 
-								icon={<Users className="w-6 h-6 text-white" />} 
-								color="amber"
-							>
-								<LawGrid>
-									<LawInfoItem label="Nome do Pai">
-										<span className="font-semibold text-slate-800">{filiation?.father ?? "Não informado"}</span>
-									</LawInfoItem>
-									<LawInfoItem label="Nome da Mãe">
-										<span className="font-semibold text-slate-800">{filiation?.mother ?? "Não informado"}</span>
-									</LawInfoItem>
-								</LawGrid>
-							</LawSection>
-						</div>
-					</TabsContent>
+  const SystemContent = () => (
+    <Section title="Informações do Sistema" icon={<Clock className="w-5 h-5" />}>
+      <InfoGrid>
+        <InfoItem label="Data de Cadastro" icon={<Calendar className="w-4 h-4" />}>
+          <span className="font-mono text-sm text-foreground">{formatDateTime(clientData.created_at)}</span>
+        </InfoItem>
+        <InfoItem label="Última Atualização" icon={<Clock className="w-4 h-4" />}>
+          <span className="font-mono text-sm text-foreground">{formatDateTime(clientData.updated_at)}</span>
+        </InfoItem>
+        <InfoItem label="ID do Cliente" icon={<Building2 className="w-4 h-4" />}>
+          <span className="font-mono text-sm text-foreground">{clientData.client_id}</span>
+        </InfoItem>
+        <InfoItem label="Status da Conta">
+          <Badge variant={clientData.userId ? "default" : "secondary"}>
+            {clientData.userId ? "Conta Ativa" : "Aguardando Ativação"}
+          </Badge>
+        </InfoItem>
+      </InfoGrid>
+    </Section>
+  )
 
-					{/* Tab Content - Contato */}
-					<TabsContent value="contact" className="flex-1 overflow-y-auto bg-slate-50 p-6">
-						<div className="max-w-6xl mx-auto space-y-6">
-							<LawSection 
-								title="Informações de Contato" 
-								icon={<Mail className="w-6 h-6 text-white" />} 
-								color="emerald"
-							>
-								<LawGrid>
-									<LawInfoItem label="Endereço de Email" icon={<Mail />}>
-										<span className="font-mono text-slate-800 bg-slate-100 px-3 py-2 rounded border">
-											{clientData.email}
-										</span>
-									</LawInfoItem>
-									<LawInfoItem label="Número de Telefone" icon={<Phone />}>
-										<span className="font-mono text-slate-800 bg-slate-100 px-3 py-2 rounded border">
-											{clientData.phone}
-										</span>
-									</LawInfoItem>
-								</LawGrid>
-							</LawSection>
+  return (
+    <div className="w-full min-h-screen bg-background">
+      <Card className="rounded-none border-x-0 border-t-0">
+        <CardHeader className="space-y-4">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <Avatar className="w-16 h-16 border-2">
+                  <AvatarImage
+                    src={clientData.photo_url ?? ""}
+                    alt={`${clientData.first_name} ${clientData.last_name}`}
+                  />
+                  <AvatarFallback className="text-lg font-semibold">
+                    {getInitials(clientData.first_name, clientData.last_name)}
+                  </AvatarFallback>
+                </Avatar>
+                {clientData.userId && (
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-600 rounded-full border-2 border-background flex items-center justify-center">
+                    <UserCheck className="w-3 h-3 text-white" />
+                  </div>
+                )}
+              </div>
 
-							<LawSection 
-								title="Endereços Registrados" 
-								icon={<Home className="w-6 h-6 text-white" />} 
-								color="indigo"
-							>
-								{clientData.address && clientData.address.length > 0 ? (
-									<div className="space-y-6">
-										{clientData.address.map((address, index) => (
-											<div
-												key={address.id}
-												className="bg-gradient-to-r from-white to-slate-50 rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
-											>
-												<div className="flex items-start gap-4">
-													<div className="w-10 h-10 bg-blue-800 rounded-lg flex items-center justify-center shadow-md">
-														<MapPin className="w-5 h-5 text-amber-400" />
-													</div>
-													<div className="flex-1 space-y-3">
-														<div className="flex items-center gap-2">
-															<Badge variant="outline" className="text-xs font-mono">
-																Endereço {index + 1}
-															</Badge>
-														</div>
-														<div className="space-y-2">
-															<p className="font-bold text-slate-900 text-lg">
-																{address.street}, {address.number}
-																{address.complement && `, ${address.complement}`}
-															</p>
-															<p className="text-slate-700 font-medium">
-																{address.neighborhood} - {address.city}/{address.state}
-															</p>
-															<p className="text-slate-600 font-mono text-sm">
-																CEP: {address.zip_code}
-															</p>
-															<Badge className="bg-blue-800 text-amber-400">
-																{address.country}
-															</Badge>
-														</div>
-													</div>
-												</div>
-											</div>
-										))}
-									</div>
-								) : (
-									<div className="text-center py-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border border-slate-200">
-										<div className="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
-											<Home className="w-8 h-8 text-slate-400" />
-										</div>
-										<p className="text-slate-600 font-semibold text-lg">Nenhum endereço cadastrado</p>
-										<p className="text-slate-500 text-sm mt-2">Os endereços do cliente aparecerão aqui quando cadastrados</p>
-									</div>
-								)}
-							</LawSection>
-						</div>
-					</TabsContent>
+              <div className="space-y-2">
+                <h1 className="text-2xl font-semibold text-foreground">
+                  {clientData.first_name} {clientData.last_name}
+                </h1>
+                <div className="flex items-center flex-wrap gap-2">
+                  <Badge variant="outline" className="font-mono text-xs">
+                    ID: {clientData.client_id}
+                  </Badge>
+                  <Badge
+                    variant={
+                      isPassportExpired(clientData.passport_expiry)
+                        ? "destructive"
+                        : isPassportExpiringSoon(clientData.passport_expiry)
+                          ? "secondary"
+                          : "default"
+                    }
+                    className="text-xs"
+                  >
+                    <Shield className="w-3 h-3 mr-1" />
+                    {isPassportExpired(clientData.passport_expiry)
+                      ? "Doc. Expirada"
+                      : isPassportExpiringSoon(clientData.passport_expiry)
+                        ? "Expira em breve"
+                        : "Doc. Válida"}
+                  </Badge>
+                </div>
+              </div>
+            </div>
 
-					{/* Tab Content - Documentação */}
-					<TabsContent value="passport" className="flex-1 overflow-y-auto bg-slate-50 p-6">
-						<div className="max-w-6xl mx-auto">
-							<LawSection 
-								title="Documentação Legal" 
-								icon={<FileText className="w-6 h-6 text-white" />} 
-								color="purple"
-							>
-								<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-									<div className="lg:col-span-2">
-										<LawGrid>
-											<LawInfoItem label="Número do Passaporte">
-												<div className="bg-gradient-to-r from-blue-800 to-blue-900 text-amber-400 font-bold font-mono text-base px-3 py-2 rounded-lg shadow-lg border border-amber-400/20">
-													{clientData.passport_number}
-												</div>
-											</LawInfoItem>
-											<LawInfoItem label="Data de Emissão" icon={<Calendar />}>
-												<span className="font-mono text-slate-800 bg-slate-100 px-3 py-2 rounded border">
-													{formatDate(clientData.passport_issue_date ?? "")}
-												</span>
-											</LawInfoItem>
-											<LawInfoItem label="Data de Expiração" icon={<Calendar />}>
-												<div className={`font-mono font-bold px-4 py-3 rounded-lg shadow-md ${
-													isPassportExpired(clientData.passport_expiry)
-														? "bg-red-100 text-red-800 border border-red-300"
-														: isPassportExpiringSoon(clientData.passport_expiry)
-															? "bg-amber-100 text-amber-800 border border-amber-300"
-															: "bg-emerald-100 text-emerald-800 border border-emerald-300"
-												}`}>
-													{formatDate(clientData.passport_expiry ?? "")}
-												</div>
-											</LawInfoItem>
-										</LawGrid>
-									</div>
-									<div className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl p-6 border border-slate-300">
-										<div className="text-center space-y-4">
-											<div className={`w-16 h-16 rounded-full mx-auto flex items-center justify-center ${
-												isPassportExpired(clientData.passport_expiry)
-													? "bg-red-500"
-													: isPassportExpiringSoon(clientData.passport_expiry)
-														? "bg-amber-500"
-														: "bg-emerald-500"
-											}`}>
-												<Shield className="w-8 h-8 text-white" />
-											</div>
-											<div>
-												<h4 className="font-bold text-slate-800 text-lg">Status da Documentação</h4>
-												<p className={`font-semibold text-sm mt-2 ${
-													isPassportExpired(clientData.passport_expiry)
-														? "text-red-600"
-														: isPassportExpiringSoon(clientData.passport_expiry)
-															? "text-amber-600"
-															: "text-emerald-600"
-												}`}>
-													{isPassportExpired(clientData.passport_expiry)
-														? "EXPIRADO - Ação Necessária"
-														: isPassportExpiringSoon(clientData.passport_expiry)
-															? "EXPIRA EM BREVE - Atenção"
-															: "VÁLIDO - Em Conformidade"}
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</LawSection>
-						</div>
-					</TabsContent>
+            <div className="flex items-center gap-2">
+              <EditClientDialog clientData={clientData} />
+              {!clientData.userId && (
+                <Button onClick={handleSendInvitation} disabled={isSending} variant="default">
+                  <Mail className="w-4 h-4 mr-2" />
+                  {isSending ? "Enviando..." : "Enviar Convite"}
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
 
-					{/* Tab Content - Sistema */}
-					<TabsContent value="system" className="flex-1 overflow-y-auto bg-slate-50 p-6">
-						<div className="max-w-6xl mx-auto">
-							<LawSection 
-								title="Informações do Sistema" 
-								icon={<Clock className="w-6 h-6 text-white" />} 
-								color="slate"
-							>
-								<LawGrid>
-									<LawInfoItem label="Data de Cadastro" icon={<Calendar />}>
-										<div className="bg-slate-100 border border-slate-300 rounded-lg p-3">
-											<span className="font-mono text-slate-800 text-sm">
-												{formatDateTime(clientData.created_at)}
-											</span>
-										</div>
-									</LawInfoItem>
-									<LawInfoItem label="Última Atualização" icon={<Clock />}>
-										<div className="bg-slate-100 border border-slate-300 rounded-lg p-3">
-											<span className="font-mono text-slate-800 text-sm">
-												{formatDateTime(clientData.updated_at)}
-											</span>
-										</div>
-									</LawInfoItem>
-								</LawGrid>
-								
-								<Separator className="my-6" />
-								
-								<div className="bg-gradient-to-r from-blue-800 to-blue-900 rounded-xl p-6 text-white">
-									<div className="flex items-center gap-3 mb-4">
-										<BookOpen className="w-5 h-5 text-amber-400" />
-										<h4 className="text-lg font-bold">Histórico Legal</h4>
-									</div>
-									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-										<div className="space-y-2">
-											<p className="text-slate-300">Cliente desde:</p>
-											<p className="font-mono text-amber-400">{formatDate(clientData.created_at)}</p>
-										</div>
-										<div className="space-y-2">
-											<p className="text-slate-300">Status no sistema:</p>
-											<Badge className="bg-emerald-600 text-white">
-												{clientData.userId ? "Conta Ativa" : "Aguardando Ativação"}
-											</Badge>
-										</div>
-									</div>
-								</div>
-							</LawSection>
-						</div>
-					</TabsContent>
-				</Tabs>
-			</div>
-		</div>
-	);
+      <div className="py-4 px-2 md:p-6">
+        {/* Desktop Tabs - hidden on mobile */}
+        <div className="hidden md:block">
+          <Tabs defaultValue="personal" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="personal" className="gap-2">
+                <User className="w-4 h-4" />
+                <span>Dados Pessoais</span>
+              </TabsTrigger>
+              <TabsTrigger value="contact" className="gap-2">
+                <Mail className="w-4 h-4" />
+                <span>Contato</span>
+              </TabsTrigger>
+              <TabsTrigger value="documentation" className="gap-2">
+                <FileText className="w-4 h-4" />
+                <span>Documentação</span>
+              </TabsTrigger>
+              <TabsTrigger value="system" className="gap-2">
+                <Clock className="w-4 h-4" />
+                <span>Sistema</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="personal">
+              <PersonalDataContent />
+            </TabsContent>
+
+            <TabsContent value="contact">
+              <ContactContent />
+            </TabsContent>
+
+            <TabsContent value="documentation">
+              <DocumentationContent />
+            </TabsContent>
+
+            <TabsContent value="system">
+              <SystemContent />
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Mobile Carousel - hidden on desktop */}
+        <div className="md:hidden">
+          <Carousel className="w-full">
+            <CarouselContent>
+              <CarouselItem>
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <User className="w-5 h-5" />
+                      <h2 className="text-lg font-semibold">Dados Pessoais</h2>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <PersonalDataContent />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+
+              <CarouselItem>
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-5 h-5" />
+                      <h2 className="text-lg font-semibold">Contato</h2>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ContactContent />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+
+              <CarouselItem>
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <FileText className="w-5 h-5" />
+                      <h2 className="text-lg font-semibold">Documentação</h2>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <DocumentationContent />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+
+              <CarouselItem>
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-5 h-5" />
+                      <h2 className="text-lg font-semibold">Sistema</h2>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <SystemContent />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious className="ml-3" />
+            <CarouselNext className="mr-3" />
+          </Carousel>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-// Tipos e variantes para o tema de advocacia
-type LawSectionColor = "slate" | "amber" | "emerald" | "indigo" | "purple" | "crimson";
+const Section: React.FC<{
+  title: string
+  icon: React.ReactNode
+  children: React.ReactNode
+}> = ({ title, icon, children }) => (
+  <div className="space-y-4">
+    <div className="flex items-center gap-2 pb-2 border-b">
+      <div className="text-muted-foreground">{icon}</div>
+      <h3 className="text-base font-semibold text-foreground">{title}</h3>
+    </div>
+    <div className="pt-2">{children}</div>
+  </div>
+)
 
-const lawColorVariants: Record<LawSectionColor, string> = {
-	slate: "from-blue-700 to-blue-800",
-	amber: "from-amber-600 to-amber-700", 
-	emerald: "from-emerald-600 to-emerald-700",
-	indigo: "from-blue-600 to-blue-700",
-	purple: "from-purple-600 to-purple-700",
-	crimson: "from-red-700 to-red-800",
-};
+const InfoGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">{children}</div>
+)
 
-// Componente Section redesenhado para advocacia
-const LawSection: React.FC<{
-	title: string;
-	icon: React.ReactNode;
-	children: React.ReactNode;
-	color?: LawSectionColor;
-}> = ({ title, icon, children, color = "slate" }) => (
-	<section className="space-y-4">
-		<div className="flex items-center gap-3 pb-3 border-b border-slate-300">
-			<div className={`w-10 h-10 flex items-center justify-center rounded-lg shadow-lg bg-gradient-to-br ${lawColorVariants[color]}`}>
-				<div className="w-5 h-5 text-white">
-					{icon}
-				</div>
-			</div>
-			<div>
-				<h3 className="text-lg font-bold text-slate-900 tracking-tight">{title}</h3>
-				<div className="w-16 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full mt-1"></div>
-			</div>
-		</div>
-		<div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-			{children}
-		</div>
-	</section>
-);
-
-// Grid redesenhado para layout profissional
-const LawGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-	<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">{children}</div>
-);
-
-// InfoItem redesenhado para advocacia
-const LawInfoItem: React.FC<{ 
-	label: string; 
-	icon?: React.ReactNode; 
-	children: React.ReactNode 
+const InfoItem: React.FC<{
+  label: string
+  icon?: React.ReactNode
+  children: React.ReactNode
 }> = ({ label, icon, children }) => (
-	<div className="space-y-2">
-		<div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wide">
-			{icon && <div className="w-4 h-4 text-slate-500">{icon}</div>}
-			{label}
-		</div>
-		<div className="text-base font-semibold text-slate-900 leading-relaxed">
-			{children}
-		</div>
-	</div>
-);
+  <div className="space-y-1.5">
+    <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wide">
+      {icon && <div className="w-4 h-4">{icon}</div>}
+      {label}
+    </div>
+    <div className="text-sm">{children}</div>
+  </div>
+)

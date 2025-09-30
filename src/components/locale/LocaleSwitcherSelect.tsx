@@ -50,8 +50,13 @@ export default function LocaleSwitcherSelect({
     <label
       className={clsx(
         'relative transition-colors duration-300 cursor-pointer',
-        isScrolled ? 'text-foreground/60' : 'text-white/80',
-        isPending && 'transition-opacity [&:disabled]:opacity-30'
+        isScrolled ? 'text-foreground/60' : 'text-foreground/80',
+        isPending && 'transition-opacity [&:disabled]:opacity-30',
+        pathname.includes('dashboard') && 'text-black',
+        pathname.includes('admin') && 'text-black',
+        pathname.includes('profile') && 'text-black',
+        pathname.includes('power-attorney') && 'text-black',
+        pathname.includes('documents') && 'text-black',
       )}
     >
       <p className="sr-only">{label}</p>
@@ -61,7 +66,12 @@ export default function LocaleSwitcherSelect({
           'hover:bg-white/10 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-ring',
           isScrolled 
             ? 'text-foreground/60 hover:text-foreground hover:bg-accent focus:bg-accent' 
-            : 'text-white/80 hover:text-white'
+            : 'text-background hover:text-foreground',
+          pathname.includes('dashboard') && 'text-black',
+          pathname.includes('admin') && 'text-black',
+          pathname.includes('profile') && 'text-black',
+          pathname.includes('power-attorney') && 'text-black',
+          pathname.includes('documents') && 'text-black',
         )}
         defaultValue={defaultValue}
         disabled={isPending}
