@@ -3,6 +3,7 @@
 import { getAllClients } from "@/actions/client";
 import { CreateClientDialog } from "@/components/client/create-client-dialog";
 import type { ClientSchema } from "@/zod-schemas/client-schema";
+import { Scale } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
@@ -61,7 +62,27 @@ export default function ClientsPage() {
 		return (
 			<div className="container mx-auto max-h-full overflow-y-hidden space-y-6">
 				<div className="flex items-center justify-center h-64">
-					<div className="text-slate-600">Carregando clientes...</div>
+					<div className="text-slate-600">
+						<div className="flex flex-col items-center gap-6">
+        {/* Animated scales icon */}
+        <div className="relative">
+          <div className="absolute inset-0 animate-ping opacity-20">
+            <Scale className="w-16 h-16 text-primary" />
+          </div>
+          <Scale className="w-16 h-16 text-primary animate-pulse" />
+        </div>
+
+        {/* Loading text */}
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="text-xl font-semibold text-foreground tracking-tight">The Attorney</h2>
+          <div className="flex gap-1">
+            <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+            <span className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+            <span className="w-2 h-2 bg-primary rounded-full animate-bounce"></span>
+          </div>
+        </div>
+      </div>
+					</div>
 				</div>
 			</div>
 		);

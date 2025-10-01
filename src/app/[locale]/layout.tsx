@@ -52,7 +52,7 @@ export default async function LocaleLayout({
   return (
     <html className="h-full" lang={locale} suppressHydrationWarning>
       
-      <body className={cn(geistSans.variable, geistMono.variable, 'h-full bg-background')}>
+      <body className={cn(geistSans.variable, geistMono.variable, 'h-full bg-blue-950')}>
         <ThemeProvider>
           <SessionProvider>
             <NextIntlClientProvider>

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import React from 'react';
 
 interface FooterProps {
@@ -7,6 +9,8 @@ interface FooterProps {
 }
 
 export function Footer({ className = '' }: FooterProps) {
+  const t = useTranslations("PrivacyPolicy")
+
   return (
     <footer className={`relative flex w-full pb-[100px] text-[#d6dfed] min-h-[400px] pt-40 ${className}`}>
       {/* Background com ondas animadas */}
@@ -105,31 +109,33 @@ export function Footer({ className = '' }: FooterProps) {
         {/* Links de navegação */}
         <ul className="flex list-none p-0 m-0 gap-[14px]">
           <li>
-            <a href="#" className="text-[#d6dfed] hover:text-white transition-colors">
+            <a href="#hero" className="text-[#d6dfed] hover:text-white transition-colors">
               Home
             </a>
           </li>
           <li>
-            <a href="#" className="text-[#d6dfed] hover:text-white transition-colors">
+            <a href="#about" className="text-[#d6dfed] hover:text-white transition-colors">
               About
             </a>
           </li>
           <li>
-            <a href="#" className="text-[#d6dfed] hover:text-white transition-colors">
-              Portfolio
+            <a href="#services" className="text-[#d6dfed] hover:text-white transition-colors">
+              Services
             </a>
           </li>
           <li>
-            <a href="#" className="text-[#d6dfed] hover:text-white transition-colors">
-              Skills
+            <a href="#faqs" className="text-[#d6dfed] hover:text-white transition-colors">
+              FAQs
             </a>
           </li>
           <li>
-            <a href="#" className="text-[#d6dfed] hover:text-white transition-colors">
+            <a href="#contact" className="text-[#d6dfed] hover:text-white transition-colors">
               Contact
             </a>
           </li>
         </ul>
+
+            <Link href="/privacy-policy" className="text-[#d6dfed] hover:text-white transition-colors">{t("title")}</Link>
         
         {/* Copyright */}
         <p className="text-xs m-0 text-[#a2b6e1]">© 2025 All rights reserved</p>

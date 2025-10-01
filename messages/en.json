@@ -266,5 +266,113 @@
 				}
 			]
 		}
-	}
+	},
+	 "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": "This Privacy Policy describes how The Attorney (hereinafter \"Firm\"), based in Portugal, collects, uses, stores and protects the personal data of its clients, potential clients, partners and users of our website, in accordance with Regulation (EU) 2016/679 – General Data Protection Regulation (GDPR) and applicable national legislation.\n\nThe Firm is committed to protecting the privacy and confidentiality of the information entrusted to us."
+      },
+      "dataCollected": {
+        "title": "2. Personal Data Collected",
+        "intro": "The Firm may collect and process the following personal data:",
+        "items": [
+          {
+            "label": "Identification",
+            "text": "full name, date of birth, nationality, identification document number (ID/passport)."
+          },
+          {
+            "label": "Contact information",
+            "text": "address, email, phone/mobile number."
+          },
+          {
+            "label": "Professional data",
+            "text": "profession, employer."
+          },
+          {
+            "label": "Data necessary for the provision of legal services",
+            "text": "information related to legal proceedings, contracts, documents and other relevant information."
+          },
+          {
+            "label": "Website browsing data",
+            "text": "IP address, approximate geographic location, cookies, browsing history (when applicable and with consent)."
+          }
+        ]
+      },
+      "purposes": {
+        "title": "3. Processing Purposes",
+        "intro": "The personal data collected is processed for the following purposes:",
+        "items": [
+          "Provision of legal services and legal advice.",
+          "Compliance with legal and regulatory obligations applicable to the practice of law.",
+          "Client and contact management.",
+          "Communication of information related to the services provided.",
+          "Improvement of the website user experience."
+        ]
+      },
+      "legalBasis": {
+        "title": "4. Legal Basis",
+        "intro": "The processing of personal data by the Firm is based on:",
+        "items": [
+          "Performance of a contract or pre-contractual measures (Article 6(1)(b) GDPR).",
+          "Compliance with legal obligations (Article 6(1)(c) GDPR).",
+          "Consent of the data subject, when applicable (Article 6(1)(a) GDPR).",
+          "Legitimate interests of the Firm (Article 6(1)(f) GDPR), namely for administrative management purposes and service improvement."
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Data Sharing",
+        "intro": "The Firm does not share personal data with third parties, except when:",
+        "items": [
+          "It is necessary to comply with legal obligations.",
+          "The data subject has given express consent.",
+          "Sharing is necessary for the provision of services (e.g., courts, regulatory entities or professional partners), always ensuring confidentiality."
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Data Retention",
+        "content": "Personal data is retained only for the period necessary for the purposes of processing or for the time required by law and regulations applicable to the legal profession and its practice."
+      },
+      "rights": {
+        "title": "7. Data Subject Rights",
+        "intro": "Under applicable legislation, the data subject has the following rights:",
+        "items": [
+          "Right of access to their personal data.",
+          "Right to rectification of inaccurate or incomplete data.",
+          "Right to erasure of data (\"right to be forgotten\"), when applicable.",
+          "Right to restriction of processing.",
+          "Right to data portability.",
+          "Right to object to processing.",
+          "Right to withdraw consent, when processing is based on this ground."
+        ],
+        "footer": "To exercise their rights, the data subject should contact the Firm through the means indicated below."
+      },
+      "security": {
+        "title": "8. Security",
+        "content": "The Firm adopts appropriate technical and organizational measures to protect personal data against unauthorized access, loss, disclosure or destruction, ensuring the confidentiality and integrity of information."
+      },
+      "cookies": {
+        "title": "9. Cookies",
+        "content": "Our website may use cookies to improve the user experience. The use of cookies will always be preceded by user consent, in accordance with applicable legislation."
+      },
+      "contact": {
+        "title": "10. Contact",
+        "intro": "If you have any questions or wish to exercise your rights, you can contact us through:",
+        "officeName": "[Law Firm Name]",
+        "address": "Address: [office address]",
+        "email": "Email: [contact email]",
+        "phone": "Phone: [contact number]"
+      },
+      "authority": {
+        "title": "11. Supervisory Authority",
+        "content": "The data subject also has the right to lodge a complaint with the National Data Protection Commission (CNPD), the supervisory authority in Portugal."
+      },
+      "changes": {
+        "title": "12. Changes to the Privacy Policy",
+        "content": "The Firm may update this Privacy Policy at any time. Any changes will be published on the website with the respective update date."
+      }
+    }
+  }
 }

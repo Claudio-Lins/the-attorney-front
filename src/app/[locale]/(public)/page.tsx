@@ -1,21 +1,20 @@
-import { SignOut } from '@/components/auth/sign-out';
+import { AboutSection } from '@/components/sections/about-section';
 import { HeroSection } from '@/components/sections/hero-section';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/animated-container';
-import { auth } from '@/lib/auth';
-import { getTranslations } from 'next-intl/server';
+import { Services } from '@/components/sections/services';
 import { Suspense } from 'react';
 
 export default async function Home() {
-   const session = await auth();
-   
-   console.log("Session no Home:", JSON.stringify(session, null, 2));
-   
-  const t = await getTranslations('HomePage');
   
   return (
     <main className="min-h-dvh">
-			<Suspense fallback={<div className="min-h-dvh w-full flex items-center justify-center">Loading...</div>}>
+			<Suspense fallback={<div className=" w-full flex items-center justify-center">Loading...</div>}>
 				<HeroSection />
+      </Suspense>
+      <Suspense fallback={<div className="w-full flex items-center justify-center">Loading...</div>}>
+				<AboutSection />
+      </Suspense>
+      <Suspense fallback={<div className=" w-full flex items-center justify-center">Loading...</div>}>
+				<Services />
 			</Suspense>
     </main>
   );

@@ -57,6 +57,7 @@ export default function LocaleSwitcherSelect({
         pathname.includes('profile') && 'text-black',
         pathname.includes('power-attorney') && 'text-black',
         pathname.includes('documents') && 'text-black',
+        pathname.includes('privacy-policy') && 'text-black',
       )}
     >
       <p className="sr-only">{label}</p>
@@ -72,6 +73,7 @@ export default function LocaleSwitcherSelect({
           pathname.includes('profile') && 'text-black',
           pathname.includes('power-attorney') && 'text-black',
           pathname.includes('documents') && 'text-black',
+          pathname.includes('privacy-policy') && 'text-black',
         )}
         defaultValue={defaultValue}
         disabled={isPending}

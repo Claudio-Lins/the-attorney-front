@@ -266,5 +266,116 @@
 				}
 			]
 		}
-	}
+	},
+	
+  "PrivacyPolicy": {
+    "title": "Política de Privacidade",
+    "lastUpdated": "Última atualização",
+    "sections": {
+      "introduction": {
+        "title": "1. Introdução",
+        "content": "A presente Política de Privacidade descreve a forma como o The Attorney (adiante \"Escritório\"), com sede em Portugal, recolhe, utiliza, armazena e protege os dados pessoais dos seus clientes, potenciais clientes, parceiros e utilizadores do nosso website, em conformidade com o Regulamento (UE) 2016/679 – Regulamento Geral sobre a Proteção de Dados (RGPD) e a legislação nacional aplicável.\n\nO Escritório está empenhado em proteger a privacidade e a confidencialidade das informações que nos são confiadas."
+      },
+      "dataCollected": {
+        "title": "2. Dados Pessoais Recolhidos",
+        "intro": "O Escritório poderá recolher e tratar os seguintes dados pessoais:",
+        "items": [
+          {
+            "label": "Identificação",
+            "text": "nome completo, data de nascimento, nacionalidade, número de documento de identificação (BI/CC/passaporte)."
+          },
+          {
+            "label": "Contactos",
+            "text": "morada, e-mail, número de telefone/telemóvel."
+          },
+          {
+            "label": "Dados profissionais",
+            "text": "profissão, entidade empregadora."
+          },
+          {
+            "label": "Dados necessários para a prestação de serviços jurídicos",
+            "text": "informações relacionadas com processos legais, contratos, documentos e outras informações relevantes."
+          },
+          {
+            "label": "Dados de navegação no website",
+            "text": "endereço IP, localização geográfica aproximada, cookies, histórico de navegação (quando aplicável e mediante consentimento)."
+          }
+        ]
+      },
+      "purposes": {
+        "title": "3. Finalidades do Tratamento",
+        "intro": "Os dados pessoais recolhidos são tratados para as seguintes finalidades:",
+        "items": [
+          "Prestação de serviços jurídicos e consultoria legal.",
+          "Cumprimento de obrigações legais e regulamentares aplicáveis ao exercício da advocacia.",
+          "Gestão de clientes e contactos.",
+          "Comunicação de informações relacionadas com os serviços prestados.",
+          "Melhoria da experiência de utilização do website."
+        ]
+      },
+      "legalBasis": {
+        "title": "4. Fundamento Jurídico",
+        "intro": "O tratamento de dados pessoais pelo Escritório baseia-se em:",
+        "items": [
+          "Execução de contrato ou diligências pré-contratuais (art.º 6.º, n.º 1, alínea b) do RGPD).",
+          "Cumprimento de obrigações legais (art.º 6.º, n.º 1, alínea c) do RGPD).",
+          "Consentimento do titular dos dados, quando aplicável (art.º 6.º, n.º 1, alínea a) do RGPD).",
+          "Interesses legítimos do Escritório (art.º 6.º, n.º 1, alínea f) do RGPD), nomeadamente para efeitos de gestão administrativa e de melhoria dos serviços."
+        ]
+      },
+      "dataSharing": {
+        "title": "5. Partilha de Dados",
+        "intro": "O Escritório não partilha os dados pessoais com terceiros, exceto quando:",
+        "items": [
+          "Tal seja necessário para cumprimento de obrigações legais.",
+          "O titular dos dados tenha dado consentimento expresso.",
+          "A partilha seja necessária à prestação de serviços (ex.: tribunais, entidades reguladoras ou parceiros profissionais), sempre garantindo a confidencialidade."
+        ]
+      },
+      "dataRetention": {
+        "title": "6. Conservação dos Dados",
+        "content": "Os dados pessoais são conservados apenas pelo período necessário para as finalidades do tratamento ou pelo tempo exigido por lei e regulamentos aplicáveis à advocacia e ao exercício da profissão."
+      },
+      "rights": {
+        "title": "7. Direitos dos Titulares dos Dados",
+        "intro": "Nos termos da legislação aplicável, o titular dos dados tem os seguintes direitos:",
+        "items": [
+          "Direito de acesso aos seus dados pessoais.",
+          "Direito de retificação de dados inexatos ou incompletos.",
+          "Direito ao apagamento dos dados (\"direito a ser esquecido\"), quando aplicável.",
+          "Direito à limitação do tratamento.",
+          "Direito à portabilidade dos dados.",
+          "Direito de oposição ao tratamento.",
+          "Direito de retirar o consentimento, quando o tratamento se basear neste fundamento."
+        ],
+        "footer": "Para exercer os seus direitos, o titular deve contactar o Escritório através dos meios indicados abaixo."
+      },
+      "security": {
+        "title": "8. Segurança",
+        "content": "O Escritório adota medidas técnicas e organizativas adequadas para proteger os dados pessoais contra acesso não autorizado, perda, divulgação ou destruição, garantindo a confidencialidade e integridade da informação."
+      },
+      "cookies": {
+        "title": "9. Cookies",
+        "content": "O nosso website pode utilizar cookies para melhorar a experiência do utilizador. O uso de cookies será sempre precedido do consentimento do utilizador, em conformidade com a legislação aplicável."
+      },
+      "contact": {
+        "title": "10. Contactos",
+        "intro": "Caso tenha dúvidas ou pretenda exercer os seus direitos, poderá contactar-nos através de:",
+        "officeName": "[Nome do Escritório de Advocacia]",
+        "address": "Endereço: [morada do escritório]",
+        "email": "E-mail: [email de contacto]",
+        "phone": "Telefone: [número de contacto]"
+      },
+      "authority": {
+        "title": "11. Autoridade de Controlo",
+        "content": "O titular dos dados tem ainda o direito de apresentar reclamação junto da Comissão Nacional de Proteção de Dados (CNPD), a autoridade de controlo em Portugal."
+      },
+      "changes": {
+        "title": "12. Alterações à Política de Privacidade",
+        "content": "O Escritório poderá atualizar esta Política de Privacidade a qualquer momento. Quaisquer alterações serão publicadas no website com a respetiva data de atualização."
+      }
+    }
+  
 }
+}
+

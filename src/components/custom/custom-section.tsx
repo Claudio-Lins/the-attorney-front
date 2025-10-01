@@ -21,8 +21,8 @@ export function CustomSection({
 		<section
 			id={id}
 			className={cn(
-				"flex flex-col gap-4 w-full pt-28 overflow-hidden px-0",
-				"md:pt-40",
+				"flex flex-col gap-4 w-full py-20 overflow-hidden px-0",
+				"",
 				sectionColor && "bg-radial-[at_25%_25%] from-blue-800 to-blue-950 to-75%",
 				minHeight && "min-h-[100dvh]",
 				className,
