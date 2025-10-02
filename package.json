@@ -7,9 +7,9 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-   "db:permissions": "bun run prisma generate && node grant-database-permissions.js",
-		"migrate:dev": "prisma migrate dev && npm run db:permissions",
-		"migrate:deploy": "prisma migrate deploy && npm run db:permissions"
+    "db:permissions": "bun run prisma generate && node grant-database-permissions.js",
+    "migrate:dev": "prisma migrate dev && npm run db:permissions",
+    "migrate:deploy": "prisma migrate deploy && npm run db:permissions"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -45,6 +45,7 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@supabase/supabase-js": "^2.50.3",
+    "@tabler/icons-react": "^3.35.0",
     "@tanstack/react-table": "^8.21.3",
     "@types/archiver": "^6.0.3",
     "archiver": "^7.0.1",
