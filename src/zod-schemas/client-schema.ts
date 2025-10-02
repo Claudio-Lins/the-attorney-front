@@ -7,7 +7,6 @@ export const clientSchema = z.object({
 	first_name: z.string().min(1, "Primeiro nome é obrigatório."),
 	last_name: z.string().min(1, "Sobrenome é obrigatório."),
 	email: z.string().email("E-mail inválido.").nullable().optional(),
-	password: z.string().nullable().optional(),
 	passport_number: z.string(),
 	country_of_birth: z.string().nullable().optional(),
 	passport_issue_date: z.coerce.date().nullable().optional(),
