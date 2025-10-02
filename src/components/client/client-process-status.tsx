@@ -4,6 +4,7 @@ import { updateClientService } from "@/actions/client-service";
 import { registerClientServiceHistory } from "@/actions/client-service-history";
 import { sendProcessStatus } from "@/actions/process-status";
 import type { client, client_service } from "@/generated/prisma/client";
+import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -20,6 +21,7 @@ interface ClientProcessStatusProps {
 
 export function ClientProcessStatus({ client, clientService }: ClientProcessStatusProps) {
 	const pathname = usePathname();
+	const locale = useLocale();
 	const [open, setOpen] = useState(false);
 	const [formData, setFormData] = useState({
 		name: `${client?.first_name} ${client?.last_name}` || "",
@@ -27,7 +29,7 @@ export function ClientProcessStatus({ client, clientService }: ClientProcessStat
 		email: client?.email || "",
 		status: statusToN8n(clientService?.status || "PENDING"),
 		message: "",
-		url: `${process.env.NEXT_PUBLIC_APP_URL}/en/client/dashboard`,
+		url: `${process.env.NEXT_PUBLIC_URL}/${locale}/client/dashboard`,
 	});
 
 	function statusToN8n(status: string) {
@@ -123,7 +125,7 @@ export function ClientProcessStatus({ client, clientService }: ClientProcessStat
 				email: client?.email || "",
 				status: statusToN8n(clientService?.status || "PENDING"),
 				message: "",
-				url: `${process.env.NEXT_PUBLIC_APP_URL}/en/client/dashboard`,
+				url: `${process.env.NEXT_PUBLIC_URL}/${locale}/client/dashboard`,
 			});
 		} catch (error) {
 			console.error("❌ Erro completo:", error);
