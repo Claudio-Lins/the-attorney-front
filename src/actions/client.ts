@@ -17,13 +17,18 @@ export async function getClientRoleByEmail(email: string): Promise<"ADMIN" | "US
 		// O Role agora está no modelo User, não no Client.
 		const user = await prisma.user.findUnique({
 			where: { email },
+			select: {
+				role: true,
+				id: true,
+				email: true,
+			},
 		});
 		if (!user) {
 			return null;
 		}
 		return user.role;
 	} catch (error) {
-		console.error("Erro ao buscar role do usuário:", error);
+		console.error("Erro ao buscar role do usuário:", JSON.stringify(error, null, 2));
 		return null;
 	}
 }
