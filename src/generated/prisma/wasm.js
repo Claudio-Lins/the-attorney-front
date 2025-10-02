@@ -197,7 +197,6 @@ exports.Prisma.ClientScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   email: 'email',
-  whatsapp: 'whatsapp',
   marital_status: 'marital_status',
   passport_number: 'passport_number',
   passport_expiry: 'passport_expiry',
@@ -212,7 +211,8 @@ exports.Prisma.ClientScalarFieldEnum = {
   photo_url: 'photo_url',
   country_of_birth: 'country_of_birth',
   passport_issue_date: 'passport_issue_date',
-  userId: 'userId'
+  userId: 'userId',
+  whatsapp: 'whatsapp'
 };
 
 exports.Prisma.AddressScalarFieldEnum = {
@@ -288,6 +288,13 @@ exports.Prisma.LeadScalarFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.WakeUpScalarFieldEnum = {
+  id: 'id',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -354,7 +361,8 @@ exports.Prisma.ModelName = {
   client_service_history: 'client_service_history',
   service: 'service',
   service_category: 'service_category',
-  lead: 'lead'
+  lead: 'lead',
+  WakeUp: 'WakeUp'
 };
 
 /**

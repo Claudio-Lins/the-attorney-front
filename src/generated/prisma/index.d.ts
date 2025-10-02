@@ -83,6 +83,11 @@ export type service_category = $Result.DefaultSelection<Prisma.$service_category
  * 
  */
 export type lead = $Result.DefaultSelection<Prisma.$leadPayload>
+/**
+ * Model WakeUp
+ * 
+ */
+export type WakeUp = $Result.DefaultSelection<Prisma.$WakeUpPayload>
 
 /**
  * Enums
@@ -408,6 +413,16 @@ export class PrismaClient<
     * ```
     */
   get lead(): Prisma.leadDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.wakeUp`: Exposes CRUD operations for the **WakeUp** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WakeUps
+    * const wakeUps = await prisma.wakeUp.findMany()
+    * ```
+    */
+  get wakeUp(): Prisma.WakeUpDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -861,7 +876,8 @@ export namespace Prisma {
     client_service_history: 'client_service_history',
     service: 'service',
     service_category: 'service_category',
-    lead: 'lead'
+    lead: 'lead',
+    WakeUp: 'WakeUp'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -880,7 +896,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "emailVerificationToken" | "passwordResetToken" | "authenticator" | "client" | "address" | "client_service" | "client_service_history" | "service" | "service_category" | "lead"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "emailVerificationToken" | "passwordResetToken" | "authenticator" | "client" | "address" | "client_service" | "client_service_history" | "service" | "service_category" | "lead" | "wakeUp"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1920,6 +1936,80 @@ export namespace Prisma {
           }
         }
       }
+      WakeUp: {
+        payload: Prisma.$WakeUpPayload<ExtArgs>
+        fields: Prisma.WakeUpFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WakeUpFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WakeUpFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          findFirst: {
+            args: Prisma.WakeUpFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WakeUpFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          findMany: {
+            args: Prisma.WakeUpFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>[]
+          }
+          create: {
+            args: Prisma.WakeUpCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          createMany: {
+            args: Prisma.WakeUpCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WakeUpCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>[]
+          }
+          delete: {
+            args: Prisma.WakeUpDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          update: {
+            args: Prisma.WakeUpUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          deleteMany: {
+            args: Prisma.WakeUpDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WakeUpUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WakeUpUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>[]
+          }
+          upsert: {
+            args: Prisma.WakeUpUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WakeUpPayload>
+          }
+          aggregate: {
+            args: Prisma.WakeUpAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWakeUp>
+          }
+          groupBy: {
+            args: Prisma.WakeUpGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WakeUpGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WakeUpCountArgs<ExtArgs>
+            result: $Utils.Optional<WakeUpCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2018,6 +2108,7 @@ export namespace Prisma {
     service?: serviceOmit
     service_category?: service_categoryOmit
     lead?: leadOmit
+    wakeUp?: WakeUpOmit
   }
 
   /* Types for Logging */
@@ -9880,7 +9971,6 @@ export namespace Prisma {
     first_name: string | null
     last_name: string | null
     email: string | null
-    whatsapp: string | null
     marital_status: $Enums.MaritalStatus | null
     passport_number: string | null
     passport_expiry: Date | null
@@ -9895,6 +9985,7 @@ export namespace Prisma {
     country_of_birth: string | null
     passport_issue_date: Date | null
     userId: string | null
+    whatsapp: string | null
   }
 
   export type ClientMaxAggregateOutputType = {
@@ -9903,7 +9994,6 @@ export namespace Prisma {
     first_name: string | null
     last_name: string | null
     email: string | null
-    whatsapp: string | null
     marital_status: $Enums.MaritalStatus | null
     passport_number: string | null
     passport_expiry: Date | null
@@ -9918,6 +10008,7 @@ export namespace Prisma {
     country_of_birth: string | null
     passport_issue_date: Date | null
     userId: string | null
+    whatsapp: string | null
   }
 
   export type ClientCountAggregateOutputType = {
@@ -9926,7 +10017,6 @@ export namespace Prisma {
     first_name: number
     last_name: number
     email: number
-    whatsapp: number
     marital_status: number
     passport_number: number
     passport_expiry: number
@@ -9942,6 +10032,7 @@ export namespace Prisma {
     country_of_birth: number
     passport_issue_date: number
     userId: number
+    whatsapp: number
     _all: number
   }
 
@@ -9952,7 +10043,6 @@ export namespace Prisma {
     first_name?: true
     last_name?: true
     email?: true
-    whatsapp?: true
     marital_status?: true
     passport_number?: true
     passport_expiry?: true
@@ -9967,6 +10057,7 @@ export namespace Prisma {
     country_of_birth?: true
     passport_issue_date?: true
     userId?: true
+    whatsapp?: true
   }
 
   export type ClientMaxAggregateInputType = {
@@ -9975,7 +10066,6 @@ export namespace Prisma {
     first_name?: true
     last_name?: true
     email?: true
-    whatsapp?: true
     marital_status?: true
     passport_number?: true
     passport_expiry?: true
@@ -9990,6 +10080,7 @@ export namespace Prisma {
     country_of_birth?: true
     passport_issue_date?: true
     userId?: true
+    whatsapp?: true
   }
 
   export type ClientCountAggregateInputType = {
@@ -9998,7 +10089,6 @@ export namespace Prisma {
     first_name?: true
     last_name?: true
     email?: true
-    whatsapp?: true
     marital_status?: true
     passport_number?: true
     passport_expiry?: true
@@ -10014,6 +10104,7 @@ export namespace Prisma {
     country_of_birth?: true
     passport_issue_date?: true
     userId?: true
+    whatsapp?: true
     _all?: true
   }
 
@@ -10095,7 +10186,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email: string | null
-    whatsapp: string | null
     marital_status: $Enums.MaritalStatus
     passport_number: string
     passport_expiry: Date | null
@@ -10111,6 +10201,7 @@ export namespace Prisma {
     country_of_birth: string | null
     passport_issue_date: Date | null
     userId: string | null
+    whatsapp: string | null
     _count: ClientCountAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
@@ -10136,7 +10227,6 @@ export namespace Prisma {
     first_name?: boolean
     last_name?: boolean
     email?: boolean
-    whatsapp?: boolean
     marital_status?: boolean
     passport_number?: boolean
     passport_expiry?: boolean
@@ -10152,6 +10242,7 @@ export namespace Prisma {
     country_of_birth?: boolean
     passport_issue_date?: boolean
     userId?: boolean
+    whatsapp?: boolean
     address?: boolean | client$addressArgs<ExtArgs>
     user?: boolean | client$userArgs<ExtArgs>
     client_service?: boolean | client$client_serviceArgs<ExtArgs>
@@ -10164,7 +10255,6 @@ export namespace Prisma {
     first_name?: boolean
     last_name?: boolean
     email?: boolean
-    whatsapp?: boolean
     marital_status?: boolean
     passport_number?: boolean
     passport_expiry?: boolean
@@ -10180,6 +10270,7 @@ export namespace Prisma {
     country_of_birth?: boolean
     passport_issue_date?: boolean
     userId?: boolean
+    whatsapp?: boolean
     user?: boolean | client$userArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -10189,7 +10280,6 @@ export namespace Prisma {
     first_name?: boolean
     last_name?: boolean
     email?: boolean
-    whatsapp?: boolean
     marital_status?: boolean
     passport_number?: boolean
     passport_expiry?: boolean
@@ -10205,6 +10295,7 @@ export namespace Prisma {
     country_of_birth?: boolean
     passport_issue_date?: boolean
     userId?: boolean
+    whatsapp?: boolean
     user?: boolean | client$userArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -10214,7 +10305,6 @@ export namespace Prisma {
     first_name?: boolean
     last_name?: boolean
     email?: boolean
-    whatsapp?: boolean
     marital_status?: boolean
     passport_number?: boolean
     passport_expiry?: boolean
@@ -10230,9 +10320,10 @@ export namespace Prisma {
     country_of_birth?: boolean
     passport_issue_date?: boolean
     userId?: boolean
+    whatsapp?: boolean
   }
 
-  export type clientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "first_name" | "last_name" | "email" | "whatsapp" | "marital_status" | "passport_number" | "passport_expiry" | "nationality" | "place_of_birth" | "date_of_birth" | "gender" | "filiation" | "created_at" | "updated_at" | "phone" | "photo_url" | "country_of_birth" | "passport_issue_date" | "userId", ExtArgs["result"]["client"]>
+  export type clientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "client_id" | "first_name" | "last_name" | "email" | "marital_status" | "passport_number" | "passport_expiry" | "nationality" | "place_of_birth" | "date_of_birth" | "gender" | "filiation" | "created_at" | "updated_at" | "phone" | "photo_url" | "country_of_birth" | "passport_issue_date" | "userId" | "whatsapp", ExtArgs["result"]["client"]>
   export type clientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     address?: boolean | client$addressArgs<ExtArgs>
     user?: boolean | client$userArgs<ExtArgs>
@@ -10259,7 +10350,6 @@ export namespace Prisma {
       first_name: string
       last_name: string
       email: string | null
-      whatsapp: string | null
       marital_status: $Enums.MaritalStatus
       passport_number: string
       passport_expiry: Date | null
@@ -10275,6 +10365,7 @@ export namespace Prisma {
       country_of_birth: string | null
       passport_issue_date: Date | null
       userId: string | null
+      whatsapp: string | null
     }, ExtArgs["result"]["client"]>
     composites: {}
   }
@@ -10706,7 +10797,6 @@ export namespace Prisma {
     readonly first_name: FieldRef<"client", 'String'>
     readonly last_name: FieldRef<"client", 'String'>
     readonly email: FieldRef<"client", 'String'>
-    readonly whatsapp: FieldRef<"client", 'String'>
     readonly marital_status: FieldRef<"client", 'MaritalStatus'>
     readonly passport_number: FieldRef<"client", 'String'>
     readonly passport_expiry: FieldRef<"client", 'DateTime'>
@@ -10722,6 +10812,7 @@ export namespace Prisma {
     readonly country_of_birth: FieldRef<"client", 'String'>
     readonly passport_issue_date: FieldRef<"client", 'DateTime'>
     readonly userId: FieldRef<"client", 'String'>
+    readonly whatsapp: FieldRef<"client", 'String'>
   }
     
 
@@ -17928,6 +18019,988 @@ export namespace Prisma {
 
 
   /**
+   * Model WakeUp
+   */
+
+  export type AggregateWakeUp = {
+    _count: WakeUpCountAggregateOutputType | null
+    _min: WakeUpMinAggregateOutputType | null
+    _max: WakeUpMaxAggregateOutputType | null
+  }
+
+  export type WakeUpMinAggregateOutputType = {
+    id: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type WakeUpMaxAggregateOutputType = {
+    id: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type WakeUpCountAggregateOutputType = {
+    id: number
+    is_active: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type WakeUpMinAggregateInputType = {
+    id?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type WakeUpMaxAggregateInputType = {
+    id?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type WakeUpCountAggregateInputType = {
+    id?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type WakeUpAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WakeUp to aggregate.
+     */
+    where?: WakeUpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WakeUps to fetch.
+     */
+    orderBy?: WakeUpOrderByWithRelationInput | WakeUpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WakeUpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WakeUps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WakeUps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WakeUps
+    **/
+    _count?: true | WakeUpCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WakeUpMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WakeUpMaxAggregateInputType
+  }
+
+  export type GetWakeUpAggregateType<T extends WakeUpAggregateArgs> = {
+        [P in keyof T & keyof AggregateWakeUp]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWakeUp[P]>
+      : GetScalarType<T[P], AggregateWakeUp[P]>
+  }
+
+
+
+
+  export type WakeUpGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WakeUpWhereInput
+    orderBy?: WakeUpOrderByWithAggregationInput | WakeUpOrderByWithAggregationInput[]
+    by: WakeUpScalarFieldEnum[] | WakeUpScalarFieldEnum
+    having?: WakeUpScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WakeUpCountAggregateInputType | true
+    _min?: WakeUpMinAggregateInputType
+    _max?: WakeUpMaxAggregateInputType
+  }
+
+  export type WakeUpGroupByOutputType = {
+    id: string
+    is_active: boolean
+    created_at: Date
+    updated_at: Date | null
+    _count: WakeUpCountAggregateOutputType | null
+    _min: WakeUpMinAggregateOutputType | null
+    _max: WakeUpMaxAggregateOutputType | null
+  }
+
+  type GetWakeUpGroupByPayload<T extends WakeUpGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WakeUpGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WakeUpGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WakeUpGroupByOutputType[P]>
+            : GetScalarType<T[P], WakeUpGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WakeUpSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["wakeUp"]>
+
+  export type WakeUpSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["wakeUp"]>
+
+  export type WakeUpSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["wakeUp"]>
+
+  export type WakeUpSelectScalar = {
+    id?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type WakeUpOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["wakeUp"]>
+
+  export type $WakeUpPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WakeUp"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      is_active: boolean
+      created_at: Date
+      updated_at: Date | null
+    }, ExtArgs["result"]["wakeUp"]>
+    composites: {}
+  }
+
+  type WakeUpGetPayload<S extends boolean | null | undefined | WakeUpDefaultArgs> = $Result.GetResult<Prisma.$WakeUpPayload, S>
+
+  type WakeUpCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WakeUpFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WakeUpCountAggregateInputType | true
+    }
+
+  export interface WakeUpDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WakeUp'], meta: { name: 'WakeUp' } }
+    /**
+     * Find zero or one WakeUp that matches the filter.
+     * @param {WakeUpFindUniqueArgs} args - Arguments to find a WakeUp
+     * @example
+     * // Get one WakeUp
+     * const wakeUp = await prisma.wakeUp.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WakeUpFindUniqueArgs>(args: SelectSubset<T, WakeUpFindUniqueArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WakeUp that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WakeUpFindUniqueOrThrowArgs} args - Arguments to find a WakeUp
+     * @example
+     * // Get one WakeUp
+     * const wakeUp = await prisma.wakeUp.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WakeUpFindUniqueOrThrowArgs>(args: SelectSubset<T, WakeUpFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WakeUp that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpFindFirstArgs} args - Arguments to find a WakeUp
+     * @example
+     * // Get one WakeUp
+     * const wakeUp = await prisma.wakeUp.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WakeUpFindFirstArgs>(args?: SelectSubset<T, WakeUpFindFirstArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WakeUp that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpFindFirstOrThrowArgs} args - Arguments to find a WakeUp
+     * @example
+     * // Get one WakeUp
+     * const wakeUp = await prisma.wakeUp.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WakeUpFindFirstOrThrowArgs>(args?: SelectSubset<T, WakeUpFindFirstOrThrowArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WakeUps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WakeUps
+     * const wakeUps = await prisma.wakeUp.findMany()
+     * 
+     * // Get first 10 WakeUps
+     * const wakeUps = await prisma.wakeUp.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const wakeUpWithIdOnly = await prisma.wakeUp.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WakeUpFindManyArgs>(args?: SelectSubset<T, WakeUpFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WakeUp.
+     * @param {WakeUpCreateArgs} args - Arguments to create a WakeUp.
+     * @example
+     * // Create one WakeUp
+     * const WakeUp = await prisma.wakeUp.create({
+     *   data: {
+     *     // ... data to create a WakeUp
+     *   }
+     * })
+     * 
+     */
+    create<T extends WakeUpCreateArgs>(args: SelectSubset<T, WakeUpCreateArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WakeUps.
+     * @param {WakeUpCreateManyArgs} args - Arguments to create many WakeUps.
+     * @example
+     * // Create many WakeUps
+     * const wakeUp = await prisma.wakeUp.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WakeUpCreateManyArgs>(args?: SelectSubset<T, WakeUpCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WakeUps and returns the data saved in the database.
+     * @param {WakeUpCreateManyAndReturnArgs} args - Arguments to create many WakeUps.
+     * @example
+     * // Create many WakeUps
+     * const wakeUp = await prisma.wakeUp.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WakeUps and only return the `id`
+     * const wakeUpWithIdOnly = await prisma.wakeUp.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WakeUpCreateManyAndReturnArgs>(args?: SelectSubset<T, WakeUpCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WakeUp.
+     * @param {WakeUpDeleteArgs} args - Arguments to delete one WakeUp.
+     * @example
+     * // Delete one WakeUp
+     * const WakeUp = await prisma.wakeUp.delete({
+     *   where: {
+     *     // ... filter to delete one WakeUp
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WakeUpDeleteArgs>(args: SelectSubset<T, WakeUpDeleteArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WakeUp.
+     * @param {WakeUpUpdateArgs} args - Arguments to update one WakeUp.
+     * @example
+     * // Update one WakeUp
+     * const wakeUp = await prisma.wakeUp.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WakeUpUpdateArgs>(args: SelectSubset<T, WakeUpUpdateArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WakeUps.
+     * @param {WakeUpDeleteManyArgs} args - Arguments to filter WakeUps to delete.
+     * @example
+     * // Delete a few WakeUps
+     * const { count } = await prisma.wakeUp.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WakeUpDeleteManyArgs>(args?: SelectSubset<T, WakeUpDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WakeUps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WakeUps
+     * const wakeUp = await prisma.wakeUp.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WakeUpUpdateManyArgs>(args: SelectSubset<T, WakeUpUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WakeUps and returns the data updated in the database.
+     * @param {WakeUpUpdateManyAndReturnArgs} args - Arguments to update many WakeUps.
+     * @example
+     * // Update many WakeUps
+     * const wakeUp = await prisma.wakeUp.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WakeUps and only return the `id`
+     * const wakeUpWithIdOnly = await prisma.wakeUp.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WakeUpUpdateManyAndReturnArgs>(args: SelectSubset<T, WakeUpUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WakeUp.
+     * @param {WakeUpUpsertArgs} args - Arguments to update or create a WakeUp.
+     * @example
+     * // Update or create a WakeUp
+     * const wakeUp = await prisma.wakeUp.upsert({
+     *   create: {
+     *     // ... data to create a WakeUp
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WakeUp we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WakeUpUpsertArgs>(args: SelectSubset<T, WakeUpUpsertArgs<ExtArgs>>): Prisma__WakeUpClient<$Result.GetResult<Prisma.$WakeUpPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WakeUps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpCountArgs} args - Arguments to filter WakeUps to count.
+     * @example
+     * // Count the number of WakeUps
+     * const count = await prisma.wakeUp.count({
+     *   where: {
+     *     // ... the filter for the WakeUps we want to count
+     *   }
+     * })
+    **/
+    count<T extends WakeUpCountArgs>(
+      args?: Subset<T, WakeUpCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WakeUpCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WakeUp.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WakeUpAggregateArgs>(args: Subset<T, WakeUpAggregateArgs>): Prisma.PrismaPromise<GetWakeUpAggregateType<T>>
+
+    /**
+     * Group by WakeUp.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WakeUpGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WakeUpGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WakeUpGroupByArgs['orderBy'] }
+        : { orderBy?: WakeUpGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WakeUpGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWakeUpGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WakeUp model
+   */
+  readonly fields: WakeUpFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WakeUp.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WakeUpClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WakeUp model
+   */
+  interface WakeUpFieldRefs {
+    readonly id: FieldRef<"WakeUp", 'String'>
+    readonly is_active: FieldRef<"WakeUp", 'Boolean'>
+    readonly created_at: FieldRef<"WakeUp", 'DateTime'>
+    readonly updated_at: FieldRef<"WakeUp", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WakeUp findUnique
+   */
+  export type WakeUpFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter, which WakeUp to fetch.
+     */
+    where: WakeUpWhereUniqueInput
+  }
+
+  /**
+   * WakeUp findUniqueOrThrow
+   */
+  export type WakeUpFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter, which WakeUp to fetch.
+     */
+    where: WakeUpWhereUniqueInput
+  }
+
+  /**
+   * WakeUp findFirst
+   */
+  export type WakeUpFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter, which WakeUp to fetch.
+     */
+    where?: WakeUpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WakeUps to fetch.
+     */
+    orderBy?: WakeUpOrderByWithRelationInput | WakeUpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WakeUps.
+     */
+    cursor?: WakeUpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WakeUps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WakeUps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WakeUps.
+     */
+    distinct?: WakeUpScalarFieldEnum | WakeUpScalarFieldEnum[]
+  }
+
+  /**
+   * WakeUp findFirstOrThrow
+   */
+  export type WakeUpFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter, which WakeUp to fetch.
+     */
+    where?: WakeUpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WakeUps to fetch.
+     */
+    orderBy?: WakeUpOrderByWithRelationInput | WakeUpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WakeUps.
+     */
+    cursor?: WakeUpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WakeUps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WakeUps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WakeUps.
+     */
+    distinct?: WakeUpScalarFieldEnum | WakeUpScalarFieldEnum[]
+  }
+
+  /**
+   * WakeUp findMany
+   */
+  export type WakeUpFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter, which WakeUps to fetch.
+     */
+    where?: WakeUpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WakeUps to fetch.
+     */
+    orderBy?: WakeUpOrderByWithRelationInput | WakeUpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WakeUps.
+     */
+    cursor?: WakeUpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WakeUps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WakeUps.
+     */
+    skip?: number
+    distinct?: WakeUpScalarFieldEnum | WakeUpScalarFieldEnum[]
+  }
+
+  /**
+   * WakeUp create
+   */
+  export type WakeUpCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * The data needed to create a WakeUp.
+     */
+    data?: XOR<WakeUpCreateInput, WakeUpUncheckedCreateInput>
+  }
+
+  /**
+   * WakeUp createMany
+   */
+  export type WakeUpCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WakeUps.
+     */
+    data: WakeUpCreateManyInput | WakeUpCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WakeUp createManyAndReturn
+   */
+  export type WakeUpCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * The data used to create many WakeUps.
+     */
+    data: WakeUpCreateManyInput | WakeUpCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WakeUp update
+   */
+  export type WakeUpUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * The data needed to update a WakeUp.
+     */
+    data: XOR<WakeUpUpdateInput, WakeUpUncheckedUpdateInput>
+    /**
+     * Choose, which WakeUp to update.
+     */
+    where: WakeUpWhereUniqueInput
+  }
+
+  /**
+   * WakeUp updateMany
+   */
+  export type WakeUpUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WakeUps.
+     */
+    data: XOR<WakeUpUpdateManyMutationInput, WakeUpUncheckedUpdateManyInput>
+    /**
+     * Filter which WakeUps to update
+     */
+    where?: WakeUpWhereInput
+    /**
+     * Limit how many WakeUps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WakeUp updateManyAndReturn
+   */
+  export type WakeUpUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * The data used to update WakeUps.
+     */
+    data: XOR<WakeUpUpdateManyMutationInput, WakeUpUncheckedUpdateManyInput>
+    /**
+     * Filter which WakeUps to update
+     */
+    where?: WakeUpWhereInput
+    /**
+     * Limit how many WakeUps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WakeUp upsert
+   */
+  export type WakeUpUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * The filter to search for the WakeUp to update in case it exists.
+     */
+    where: WakeUpWhereUniqueInput
+    /**
+     * In case the WakeUp found by the `where` argument doesn't exist, create a new WakeUp with this data.
+     */
+    create: XOR<WakeUpCreateInput, WakeUpUncheckedCreateInput>
+    /**
+     * In case the WakeUp was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WakeUpUpdateInput, WakeUpUncheckedUpdateInput>
+  }
+
+  /**
+   * WakeUp delete
+   */
+  export type WakeUpDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+    /**
+     * Filter which WakeUp to delete.
+     */
+    where: WakeUpWhereUniqueInput
+  }
+
+  /**
+   * WakeUp deleteMany
+   */
+  export type WakeUpDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WakeUps to delete
+     */
+    where?: WakeUpWhereInput
+    /**
+     * Limit how many WakeUps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WakeUp without action
+   */
+  export type WakeUpDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WakeUp
+     */
+    select?: WakeUpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WakeUp
+     */
+    omit?: WakeUpOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -18039,7 +19112,6 @@ export namespace Prisma {
     first_name: 'first_name',
     last_name: 'last_name',
     email: 'email',
-    whatsapp: 'whatsapp',
     marital_status: 'marital_status',
     passport_number: 'passport_number',
     passport_expiry: 'passport_expiry',
@@ -18054,7 +19126,8 @@ export namespace Prisma {
     photo_url: 'photo_url',
     country_of_birth: 'country_of_birth',
     passport_issue_date: 'passport_issue_date',
-    userId: 'userId'
+    userId: 'userId',
+    whatsapp: 'whatsapp'
   };
 
   export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -18149,6 +19222,16 @@ export namespace Prisma {
   };
 
   export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+  export const WakeUpScalarFieldEnum: {
+    id: 'id',
+    is_active: 'is_active',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type WakeUpScalarFieldEnum = (typeof WakeUpScalarFieldEnum)[keyof typeof WakeUpScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -18809,7 +19892,6 @@ export namespace Prisma {
     first_name?: StringFilter<"client"> | string
     last_name?: StringFilter<"client"> | string
     email?: StringNullableFilter<"client"> | string | null
-    whatsapp?: StringNullableFilter<"client"> | string | null
     marital_status?: EnumMaritalStatusFilter<"client"> | $Enums.MaritalStatus
     passport_number?: StringFilter<"client"> | string
     passport_expiry?: DateTimeNullableFilter<"client"> | Date | string | null
@@ -18825,6 +19907,7 @@ export namespace Prisma {
     country_of_birth?: StringNullableFilter<"client"> | string | null
     passport_issue_date?: DateTimeNullableFilter<"client"> | Date | string | null
     userId?: StringNullableFilter<"client"> | string | null
+    whatsapp?: StringNullableFilter<"client"> | string | null
     address?: AddressListRelationFilter
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     client_service?: Client_serviceListRelationFilter
@@ -18836,7 +19919,6 @@ export namespace Prisma {
     first_name?: SortOrder
     last_name?: SortOrder
     email?: SortOrderInput | SortOrder
-    whatsapp?: SortOrderInput | SortOrder
     marital_status?: SortOrder
     passport_number?: SortOrder
     passport_expiry?: SortOrderInput | SortOrder
@@ -18852,6 +19934,7 @@ export namespace Prisma {
     country_of_birth?: SortOrderInput | SortOrder
     passport_issue_date?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    whatsapp?: SortOrderInput | SortOrder
     address?: addressOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
     client_service?: client_serviceOrderByRelationAggregateInput
@@ -18868,7 +19951,6 @@ export namespace Prisma {
     NOT?: clientWhereInput | clientWhereInput[]
     first_name?: StringFilter<"client"> | string
     last_name?: StringFilter<"client"> | string
-    whatsapp?: StringNullableFilter<"client"> | string | null
     marital_status?: EnumMaritalStatusFilter<"client"> | $Enums.MaritalStatus
     passport_expiry?: DateTimeNullableFilter<"client"> | Date | string | null
     nationality?: StringNullableFilter<"client"> | string | null
@@ -18882,6 +19964,7 @@ export namespace Prisma {
     photo_url?: StringNullableFilter<"client"> | string | null
     country_of_birth?: StringNullableFilter<"client"> | string | null
     passport_issue_date?: DateTimeNullableFilter<"client"> | Date | string | null
+    whatsapp?: StringNullableFilter<"client"> | string | null
     address?: AddressListRelationFilter
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     client_service?: Client_serviceListRelationFilter
@@ -18893,7 +19976,6 @@ export namespace Prisma {
     first_name?: SortOrder
     last_name?: SortOrder
     email?: SortOrderInput | SortOrder
-    whatsapp?: SortOrderInput | SortOrder
     marital_status?: SortOrder
     passport_number?: SortOrder
     passport_expiry?: SortOrderInput | SortOrder
@@ -18909,6 +19991,7 @@ export namespace Prisma {
     country_of_birth?: SortOrderInput | SortOrder
     passport_issue_date?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    whatsapp?: SortOrderInput | SortOrder
     _count?: clientCountOrderByAggregateInput
     _max?: clientMaxOrderByAggregateInput
     _min?: clientMinOrderByAggregateInput
@@ -18923,7 +20006,6 @@ export namespace Prisma {
     first_name?: StringWithAggregatesFilter<"client"> | string
     last_name?: StringWithAggregatesFilter<"client"> | string
     email?: StringNullableWithAggregatesFilter<"client"> | string | null
-    whatsapp?: StringNullableWithAggregatesFilter<"client"> | string | null
     marital_status?: EnumMaritalStatusWithAggregatesFilter<"client"> | $Enums.MaritalStatus
     passport_number?: StringWithAggregatesFilter<"client"> | string
     passport_expiry?: DateTimeNullableWithAggregatesFilter<"client"> | Date | string | null
@@ -18939,6 +20021,7 @@ export namespace Prisma {
     country_of_birth?: StringNullableWithAggregatesFilter<"client"> | string | null
     passport_issue_date?: DateTimeNullableWithAggregatesFilter<"client"> | Date | string | null
     userId?: StringNullableWithAggregatesFilter<"client"> | string | null
+    whatsapp?: StringNullableWithAggregatesFilter<"client"> | string | null
   }
 
   export type addressWhereInput = {
@@ -19403,6 +20486,53 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"lead"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"lead"> | Date | string | null
     name?: StringNullableWithAggregatesFilter<"lead"> | string | null
+  }
+
+  export type WakeUpWhereInput = {
+    AND?: WakeUpWhereInput | WakeUpWhereInput[]
+    OR?: WakeUpWhereInput[]
+    NOT?: WakeUpWhereInput | WakeUpWhereInput[]
+    id?: StringFilter<"WakeUp"> | string
+    is_active?: BoolFilter<"WakeUp"> | boolean
+    created_at?: DateTimeFilter<"WakeUp"> | Date | string
+    updated_at?: DateTimeNullableFilter<"WakeUp"> | Date | string | null
+  }
+
+  export type WakeUpOrderByWithRelationInput = {
+    id?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
+  }
+
+  export type WakeUpWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WakeUpWhereInput | WakeUpWhereInput[]
+    OR?: WakeUpWhereInput[]
+    NOT?: WakeUpWhereInput | WakeUpWhereInput[]
+    is_active?: BoolFilter<"WakeUp"> | boolean
+    created_at?: DateTimeFilter<"WakeUp"> | Date | string
+    updated_at?: DateTimeNullableFilter<"WakeUp"> | Date | string | null
+  }, "id">
+
+  export type WakeUpOrderByWithAggregationInput = {
+    id?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: WakeUpCountOrderByAggregateInput
+    _max?: WakeUpMaxOrderByAggregateInput
+    _min?: WakeUpMinOrderByAggregateInput
+  }
+
+  export type WakeUpScalarWhereWithAggregatesInput = {
+    AND?: WakeUpScalarWhereWithAggregatesInput | WakeUpScalarWhereWithAggregatesInput[]
+    OR?: WakeUpScalarWhereWithAggregatesInput[]
+    NOT?: WakeUpScalarWhereWithAggregatesInput | WakeUpScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WakeUp"> | string
+    is_active?: BoolWithAggregatesFilter<"WakeUp"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"WakeUp"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"WakeUp"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -19921,7 +21051,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -19936,6 +21065,7 @@ export namespace Prisma {
     photo_url?: string | null
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
+    whatsapp?: string | null
     address?: addressCreateNestedManyWithoutClientInput
     user?: UserCreateNestedOneWithoutClientInput
     client_service?: client_serviceCreateNestedManyWithoutClientInput
@@ -19947,7 +21077,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -19963,6 +21092,7 @@ export namespace Prisma {
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
     userId?: string | null
+    whatsapp?: string | null
     address?: addressUncheckedCreateNestedManyWithoutClientInput
     client_service?: client_serviceUncheckedCreateNestedManyWithoutClientInput
   }
@@ -19973,7 +21103,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19988,6 +21117,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUpdateManyWithoutClientNestedInput
     user?: UserUpdateOneWithoutClientNestedInput
     client_service?: client_serviceUpdateManyWithoutClientNestedInput
@@ -19999,7 +21129,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20015,6 +21144,7 @@ export namespace Prisma {
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUncheckedUpdateManyWithoutClientNestedInput
     client_service?: client_serviceUncheckedUpdateManyWithoutClientNestedInput
   }
@@ -20025,7 +21155,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -20041,6 +21170,7 @@ export namespace Prisma {
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
     userId?: string | null
+    whatsapp?: string | null
   }
 
   export type clientUpdateManyMutationInput = {
@@ -20049,7 +21179,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20064,6 +21193,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type clientUncheckedUpdateManyInput = {
@@ -20072,7 +21202,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20088,6 +21217,7 @@ export namespace Prisma {
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type addressCreateInput = {
@@ -20606,6 +21736,55 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type WakeUpCreateInput = {
+    id?: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type WakeUpUncheckedCreateInput = {
+    id?: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type WakeUpUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type WakeUpUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type WakeUpCreateManyInput = {
+    id?: string
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type WakeUpUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type WakeUpUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -21158,7 +22337,6 @@ export namespace Prisma {
     first_name?: SortOrder
     last_name?: SortOrder
     email?: SortOrder
-    whatsapp?: SortOrder
     marital_status?: SortOrder
     passport_number?: SortOrder
     passport_expiry?: SortOrder
@@ -21174,6 +22352,7 @@ export namespace Prisma {
     country_of_birth?: SortOrder
     passport_issue_date?: SortOrder
     userId?: SortOrder
+    whatsapp?: SortOrder
   }
 
   export type clientMaxOrderByAggregateInput = {
@@ -21182,7 +22361,6 @@ export namespace Prisma {
     first_name?: SortOrder
     last_name?: SortOrder
     email?: SortOrder
-    whatsapp?: SortOrder
     marital_status?: SortOrder
     passport_number?: SortOrder
     passport_expiry?: SortOrder
@@ -21197,6 +22375,7 @@ export namespace Prisma {
     country_of_birth?: SortOrder
     passport_issue_date?: SortOrder
     userId?: SortOrder
+    whatsapp?: SortOrder
   }
 
   export type clientMinOrderByAggregateInput = {
@@ -21205,7 +22384,6 @@ export namespace Prisma {
     first_name?: SortOrder
     last_name?: SortOrder
     email?: SortOrder
-    whatsapp?: SortOrder
     marital_status?: SortOrder
     passport_number?: SortOrder
     passport_expiry?: SortOrder
@@ -21220,6 +22398,7 @@ export namespace Prisma {
     country_of_birth?: SortOrder
     passport_issue_date?: SortOrder
     userId?: SortOrder
+    whatsapp?: SortOrder
   }
 
   export type EnumMaritalStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -21602,6 +22781,27 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type WakeUpCountOrderByAggregateInput = {
+    id?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type WakeUpMaxOrderByAggregateInput = {
+    id?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type WakeUpMinOrderByAggregateInput = {
+    id?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -22585,7 +23785,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -22600,6 +23799,7 @@ export namespace Prisma {
     photo_url?: string | null
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
+    whatsapp?: string | null
     address?: addressCreateNestedManyWithoutClientInput
     client_service?: client_serviceCreateNestedManyWithoutClientInput
   }
@@ -22610,7 +23810,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -22625,6 +23824,7 @@ export namespace Prisma {
     photo_url?: string | null
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
+    whatsapp?: string | null
     address?: addressUncheckedCreateNestedManyWithoutClientInput
     client_service?: client_serviceUncheckedCreateNestedManyWithoutClientInput
   }
@@ -22743,7 +23943,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22758,6 +23957,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUpdateManyWithoutClientNestedInput
     client_service?: client_serviceUpdateManyWithoutClientNestedInput
   }
@@ -22768,7 +23968,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22783,6 +23982,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUncheckedUpdateManyWithoutClientNestedInput
     client_service?: client_serviceUncheckedUpdateManyWithoutClientNestedInput
   }
@@ -23246,7 +24446,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -23261,6 +24460,7 @@ export namespace Prisma {
     photo_url?: string | null
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
+    whatsapp?: string | null
     user?: UserCreateNestedOneWithoutClientInput
     client_service?: client_serviceCreateNestedManyWithoutClientInput
   }
@@ -23271,7 +24471,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -23287,6 +24486,7 @@ export namespace Prisma {
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
     userId?: string | null
+    whatsapp?: string | null
     client_service?: client_serviceUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -23312,7 +24512,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23327,6 +24526,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneWithoutClientNestedInput
     client_service?: client_serviceUpdateManyWithoutClientNestedInput
   }
@@ -23337,7 +24537,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23353,6 +24552,7 @@ export namespace Prisma {
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     client_service?: client_serviceUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -23362,7 +24562,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -23377,6 +24576,7 @@ export namespace Prisma {
     photo_url?: string | null
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
+    whatsapp?: string | null
     address?: addressCreateNestedManyWithoutClientInput
     user?: UserCreateNestedOneWithoutClientInput
   }
@@ -23387,7 +24587,6 @@ export namespace Prisma {
     first_name: string
     last_name: string
     email?: string | null
-    whatsapp?: string | null
     marital_status?: $Enums.MaritalStatus
     passport_number: string
     passport_expiry?: Date | string | null
@@ -23403,6 +24602,7 @@ export namespace Prisma {
     country_of_birth?: string | null
     passport_issue_date?: Date | string | null
     userId?: string | null
+    whatsapp?: string | null
     address?: addressUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -23487,7 +24687,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23502,6 +24701,7 @@ export namespace Prisma {
     photo_url?: NullableStringFieldUpdateOperationsInput | string | null
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUpdateManyWithoutClientNestedInput
     user?: UserUpdateOneWithoutClientNestedInput
   }
@@ -23512,7 +24712,6 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     marital_status?: EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
     passport_number?: StringFieldUpdateOperationsInput | string
     passport_expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23528,6 +24727,7 @@ export namespace Prisma {
     country_of_birth?: NullableStringFieldUpdateOperationsInput | string | null
     passport_issue_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     address?: addressUncheckedUpdateManyWithoutClientNestedInput
   }
 

@@ -105,7 +105,6 @@ model client {
   first_name          String
   last_name           String
   email               String?          @unique
-  whatsapp            String?
   marital_status      MaritalStatus    @default(SINGLE)
   passport_number     String           @unique
   passport_expiry     DateTime?        @db.Timestamp(6)
@@ -121,6 +120,7 @@ model client {
   country_of_birth    String?
   passport_issue_date DateTime?        @db.Timestamp(6)
   userId              String?          @unique
+  whatsapp            String?
   address             address[]
   user                User?            @relation(fields: [userId], references: [id])
   client_service      client_service[]
@@ -207,6 +207,13 @@ model lead {
   created_at DateTime  @default(now()) @db.Timestamptz(6)
   updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
   name       String?
+}
+
+model WakeUp {
+  id         String    @id @default(dbgenerated("gen_random_uuid()"))
+  is_active  Boolean   @default(false)
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
 }
 
 enum Role {

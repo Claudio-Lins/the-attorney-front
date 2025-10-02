@@ -3,15 +3,16 @@
 import { sendVerificationEmail } from "@/actions/email-verification-actions"
 import { Button } from "@/components/ui/button"
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
+import { useLocale } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -23,6 +24,7 @@ export function RequestVerificationForm({
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState("")
   const router = useRouter()
+  const locale = useLocale()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,7 +37,7 @@ export function RequestVerificationForm({
       setMessage("✅ " + result.message)
       // Redirecionar para página de verificação após 2 segundos
       setTimeout(() => {
-        router.push(`/en/verify-code?email=${encodeURIComponent(email)}`)
+        router.push(`/${locale}/verify-code?email=${encodeURIComponent(email)}`)
       }, 2000)
     } else {
       setMessage("❌ " + result.message)
